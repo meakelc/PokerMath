@@ -45,7 +45,7 @@ development_status:
   # Epic 1: Navigable Learning Shell
   epic-1: in-progress
   1-1-verified-project-scaffold-test-harness: done
-  1-2-deep-table-design-token-layer: review
+  1-2-deep-table-design-token-layer: done
   1-3-two-pane-app-frame-in-memory-state-store: backlog
   1-4-sidebar-section-index-free-navigation: backlog
   1-5-back-next-pager: backlog

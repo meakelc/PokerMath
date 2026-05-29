@@ -4,7 +4,7 @@ baseline_commit: 3da33a0cf86811c1f4da168c09891e788e38ae49
 
 # Story 1.2: "Deep Table" design-token layer
 
-Status: review
+Status: done
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
@@ -273,6 +273,16 @@ None — implementation proceeded without errors.
 - pokermath/src/main.ts (modified)
 - pokermath/src/app.css (deleted)
 
+### Review Findings
+
+- [x] [Review][Defer] Google Fonts offline/blocked — silent font degradation [pokermath/index.html:6-8] — deferred, acknowledged tradeoff per spec; fallback stacks present in all font tokens
+- [x] [Review][Defer] `font-display: swap` behavior controlled by CDN URL — invisible in code [pokermath/index.html:8] — deferred, documentation concern only
+- [x] [Review][Defer] Typography companion tokens (`--tracking-*`) must be applied separately; `--font-label-caps` implies caps but no `text-transform` companion [pokermath/src/styles/tokens.css:27-40] — deferred, intentional per CSS `font` shorthand limitations
+- [x] [Review][Defer] `--ratio-card: 2 / 3` browser compatibility — older browsers without `aspect-ratio` support; token not yet consumed [pokermath/src/styles/tokens.css:68] — deferred, pre-existing browser target concern
+- [x] [Review][Defer] `--shadow-button-primary` lacks hover/active state variants [pokermath/src/styles/tokens.css:60] — deferred, future story scope (button component)
+- [x] [Review][Defer] rgba() tints duplicate base color RGB literals (`success-tint`, `hint-tint`) [pokermath/src/styles/tokens.css:16,18] — deferred, verbatim DESIGN.md transcription; `color-mix()` refactor is future work
+
 ### Change Log
 
 - 2026-05-29: Story 1.2 implemented — design-token layer established. Created `tokens.css` (all DESIGN.md tokens) and `global.css` (resets + felt canvas). Loaded Fraunces/Inter/JetBrains Mono via Google Fonts `<link>`. Rewired `main.ts` import, deleted transitional `app.css`. All four verification commands pass.
+- 2026-05-29: Code review complete — 0 patches, 6 deferred, 6 dismissed. Story marked done.

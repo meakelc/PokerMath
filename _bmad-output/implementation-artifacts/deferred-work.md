@@ -1,5 +1,14 @@
 # Deferred Work
 
+## Deferred from: code review of 1-2-deep-table-design-token-layer (2026-05-29)
+
+- Google Fonts offline/blocked — silent font degradation [pokermath/index.html:6-8] — acknowledged tradeoff per spec; fallback stacks (`serif`/`sans-serif`/`monospace`) present in all font tokens. Revisit if true offline fidelity is required (would need `@fontsource` self-hosting).
+- `font-display: swap` behavior controlled by CDN URL parameter — invisible to code readers [pokermath/index.html:8] — documentation concern only; add a comment if team needs visibility.
+- Typography companion tokens (`--tracking-*`) must be applied separately alongside font shorthand tokens; `--font-label-caps` implies caps styling but no `text-transform` companion token exists [pokermath/src/styles/tokens.css:27-40] — intentional per CSS `font` shorthand limitations; consuming components must apply `letter-spacing` and `text-transform` manually.
+- `--ratio-card: 2 / 3` browser compatibility — older browsers without `aspect-ratio` support [pokermath/src/styles/tokens.css:68] — pre-existing browser target concern; token is not yet consumed; address when PlayingCard component is built.
+- `--shadow-button-primary` lacks hover/active/focus state variants [pokermath/src/styles/tokens.css:60] — future story scope; address when button component is built.
+- rgba() tints duplicate base color RGB literals (`--color-success-tint`, `--color-hint-tint`) [pokermath/src/styles/tokens.css:16,18] — verbatim DESIGN.md transcription; `color-mix()` refactor is future work when browser support is sufficient.
+
 ## Deferred from: code review of 1-1-verified-project-scaffold-test-harness (2026-05-29)
 
 - No CI pipeline — `.github/workflows` absent; test/check/build scripts only enforce locally. Address when setting up deployment/CI infrastructure.
