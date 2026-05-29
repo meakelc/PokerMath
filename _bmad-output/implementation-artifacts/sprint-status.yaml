@@ -35,7 +35,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 
 generated: 2026-05-29
-last_updated: 2026-05-29T13:47:00Z
+last_updated: 2026-05-29
 project: PokerMath
 project_key: NOKEY
 tracking_system: file-system
@@ -45,7 +45,7 @@ development_status:
   # Epic 1: Navigable Learning Shell
   epic-1: in-progress
   1-1-verified-project-scaffold-test-harness: done
-  1-2-deep-table-design-token-layer: backlog
+  1-2-deep-table-design-token-layer: review
   1-3-two-pane-app-frame-in-memory-state-store: backlog
   1-4-sidebar-section-index-free-navigation: backlog
   1-5-back-next-pager: backlog
