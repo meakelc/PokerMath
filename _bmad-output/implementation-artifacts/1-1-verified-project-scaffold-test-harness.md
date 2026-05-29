@@ -4,7 +4,7 @@ baseline_commit: 91e58675050cfd0a4ea01bb6a38fcee4efa43394
 
 # Story 1.1: Verified project scaffold & test harness
 
-Status: review
+Status: done
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
@@ -71,9 +71,9 @@ so that all later work starts from a known-good foundation that builds, type-che
 
 ### Review Findings
 
-- [ ] [Review][Decision] Git repo structure — `pokermath/` is entirely untracked in what appears to be a home-directory git repo (`C:\Users\meake`); decide whether to initialize a dedicated repo at `C:\Users\meake\Documents\Sites\PokerMath` or properly add `pokermath/` to the existing tracked structure; `package-lock.json` is also untracked, making the build non-reproducible on CI or a fresh machine
-- [ ] [Review][Decision] AC2 verification gap — `dist/index.html` is present on disk but may be stale from a pre-cleanup build; all four commands (`dev`, `build`, `check`, `test`) must be re-run against the current cleaned-up files to confirm AC2 is satisfied
-- [ ] [Review][Patch] `smoke.test.ts` included in `tsconfig.app.json` scope (`"src/**/*.ts"` include glob); as the test suite grows, any use of Vitest globals (`describe`, `it`, `vi`) will cause `npm run check` to fail — exclude test files from the app tsconfig or add a dedicated `tsconfig.test.json` with `"types": ["vitest/globals"]` [pokermath/tsconfig.app.json]
+- [x] [Review][Decision] Git repo structure — resolved: initialized dedicated git repo at `C:\Users\meake\Documents\Sites\PokerMath`; all project files + `package-lock.json` committed in initial commit `3f19e1e`
+- [x] [Review][Decision] AC2 verification gap — resolved: all four commands re-run against current cleaned files; check (0 errors), build (dist/ emitted fresh), test (1 passed), dev (Vite ready) all green (2026-05-29)
+- [x] [Review][Patch] `smoke.test.ts` included in `tsconfig.app.json` scope (`"src/**/*.ts"` include glob); as the test suite grows, any use of Vitest globals (`describe`, `it`, `vi`) will cause `npm run check` to fail — exclude test files from the app tsconfig or add a dedicated `tsconfig.test.json` with `"types": ["vitest/globals"]` [pokermath/tsconfig.app.json] — fixed: added `"exclude": ["src/**/*.test.ts", "src/**/*.spec.ts"]`; check now passes at 85 files, 0 errors
 - [x] [Review][Defer] No CI pipeline — `.github/workflows` absent; test/check/build scripts only run locally [pokermath/package.json] — deferred, pre-existing
 - [x] [Review][Defer] `environment: 'node'` latent constraint — component tests will require `jsdom`/`happy-dom` which is not a current dependency; intentional per spec [pokermath/vite.config.ts:7] — deferred, pre-existing
 - [x] [Review][Defer] No `engines` field in `package.json` — Node version assumption (24.x implied by `@types/node^24`) is undocumented [pokermath/package.json] — deferred, pre-existing
