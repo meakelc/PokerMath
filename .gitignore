@@ -1,0 +1,15 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.idea/
+*.suo
+*.sw?
+
+# Vite scaffold (also covered by pokermath/.gitignore)
+pokermath/node_modules/
+pokermath/dist/
+pokermath/dist-ssr/
+pokermath/*.local
+pokermath/*.log

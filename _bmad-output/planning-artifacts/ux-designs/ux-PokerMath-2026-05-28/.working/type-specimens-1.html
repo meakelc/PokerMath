@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PokerMath — Typography Options</title>
+<!-- Real fonts loaded from Google Fonts so you judge actual type, not approximations. Needs internet (your browser has it). -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&family=Spectral:wght@400;500;600&family=Work+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --felt:#0b3d2c; --felt-deep:#07291d; --txt:#eef2ef; --gold:#e0b24c;
+    --h:#d0322f; --c:#1f9d55;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;padding:32px;background:#1a1a1a;color:#eee;font-family:Inter,system-ui,sans-serif;}
+  h1{font-size:22px;font-weight:600;margin:0 0 4px;}
+  .sub{color:#999;font-size:13px;margin:0 0 28px;max-width:62ch;}
+  .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;}
+  @media (max-width:1000px){.grid{grid-template-columns:1fr;}}
+
+  .spec{border:1px solid #333;border-radius:12px;overflow:hidden;background:#232323;}
+  .spec > header{padding:12px 16px;border-bottom:1px solid #333;}
+  .spec h2{margin:0 0 2px;font-size:15px;font-family:Inter,sans-serif;}
+  .spec .reg{color:#aaa;font-size:11.5px;font-family:Inter,sans-serif;}
+  .stage{background:var(--felt);color:var(--txt);padding:22px 24px;}
+  .kick{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+  .stage h3{margin:0 0 10px;}
+  .stage p{margin:0 0 12px;line-height:1.55;}
+  .math{background:var(--felt-deep);border-left:2px solid var(--gold);padding:8px 12px;margin:0 0 12px;border-radius:0 6px 6px 0;}
+  .notation{color:var(--txt);}
+  .equity{color:var(--gold);font-weight:600;}
+  .btn{display:inline-block;background:var(--gold);color:#241a07;padding:8px 16px;border-radius:7px;font-weight:600;font-size:13px;}
+  .fontnote{font-size:10.5px;color:#888;padding:10px 16px;font-family:Inter,sans-serif;border-top:1px solid #333;}
+
+  /* ---- A: Textbook (Fraunces headings + Inter body) ---- */
+  .A h3{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:23px;letter-spacing:-.01em;}
+  .A p,.A .math{font-family:"Inter",sans-serif;font-size:14.5px;}
+  .A .notation,.A .equity{font-family:"Inter",sans-serif;font-variant-numeric:tabular-nums;}
+
+  /* ---- B: Clean App (Inter Tight headings + Inter body) ---- */
+  .B h3{font-family:"Inter Tight",sans-serif;font-weight:700;font-size:22px;letter-spacing:-.02em;}
+  .B p,.B .math{font-family:"Inter",sans-serif;font-size:14.5px;}
+  .B .notation,.B .equity{font-family:"Inter",sans-serif;font-variant-numeric:tabular-nums;}
+
+  /* ---- C: Editorial Serif (Spectral throughout) ---- */
+  .C h3{font-family:"Spectral",Georgia,serif;font-weight:600;font-size:24px;}
+  .C p,.C .math{font-family:"Spectral",Georgia,serif;font-size:16px;font-weight:400;}
+  .C .notation,.C .equity{font-family:"Spectral",serif;font-weight:600;}
+
+  /* ---- D: Computational (Work Sans + JetBrains Mono for notation/numbers) ---- */
+  .D h3{font-family:"Work Sans",sans-serif;font-weight:700;font-size:22px;letter-spacing:-.01em;}
+  .D p{font-family:"Work Sans",sans-serif;font-size:14.5px;}
+  .D .math{font-family:"JetBrains Mono",monospace;font-size:13px;}
+  .D .notation,.D .equity{font-family:"JetBrains Mono",monospace;font-weight:600;}
+</style>
+</head>
+<body>
+  <h1>PokerMath — typography options</h1>
+  <p class="sub">Same content, four type systems, on the Deep Table felt. Watch how each handles three things this product leans on: <b>instructional prose</b> (lots of reading), <b>the math line</b>, and <b>card notation + computed values</b>. Tell me a letter.</p>
+
+  <div class="grid">
+
+    <section class="spec A">
+      <header><h2>A · Textbook</h2><span class="reg">Fraunces (warm serif headings) + Inter body. Reads like a well-made textbook.</span></header>
+      <div class="stage">
+        <div class="kick">Equity &amp; the Rule of 2-and-4</div>
+        <h3>Counting your outs</h3>
+        <p>Equity is your hand’s chance of winning at showdown. With <span class="notation">Ah Kh</span> on a <span class="notation">Qh 8h 7c</span> flop, any heart completes your flush — that’s nine cards still unseen.</p>
+        <div class="math">P(flush) = P(turn) + P(river) − P(both) ≈ <span class="equity">36%</span></div>
+        <p>The Rule of 2-and-4 shortcuts this: <span class="notation">9 outs × 4</span> ≈ <span class="equity">36%</span> with two streets to come.</p>
+        <span class="btn">Check Answer</span>
+      </div>
+      <div class="fontnote">Heading serif gives gravitas + warmth; Inter keeps prose crisp. Safe, classy default.</div>
+    </section>
+
+    <section class="spec B">
+      <header><h2>B · Clean App</h2><span class="reg">Inter Tight headings + Inter body. Neutral, modern, focused software.</span></header>
+      <div class="stage">
+        <div class="kick">Equity &amp; the Rule of 2-and-4</div>
+        <h3>Counting your outs</h3>
+        <p>Equity is your hand’s chance of winning at showdown. With <span class="notation">Ah Kh</span> on a <span class="notation">Qh 8h 7c</span> flop, any heart completes your flush — that’s nine cards still unseen.</p>
+        <div class="math">P(flush) = P(turn) + P(river) − P(both) ≈ <span class="equity">36%</span></div>
+        <p>The Rule of 2-and-4 shortcuts this: <span class="notation">9 outs × 4</span> ≈ <span class="equity">36%</span> with two streets to come.</p>
+        <span class="btn">Check Answer</span>
+      </div>
+      <div class="fontnote">Single family = effortless consistency. Most "app", least "study material" character.</div>
+    </section>
+
+    <section class="spec C">
+      <header><h2>C · Editorial Serif</h2><span class="reg">Spectral throughout. Immersive, scholarly reading.</span></header>
+      <div class="stage">
+        <div class="kick">Equity &amp; the Rule of 2-and-4</div>
+        <h3>Counting your outs</h3>
+        <p>Equity is your hand’s chance of winning at showdown. With <span class="notation">Ah Kh</span> on a <span class="notation">Qh 8h 7c</span> flop, any heart completes your flush — that’s nine cards still unseen.</p>
+        <div class="math">P(flush) = P(turn) + P(river) − P(both) ≈ <span class="equity">36%</span></div>
+        <p>The Rule of 2-and-4 shortcuts this: <span class="notation">9 outs × 4</span> ≈ <span class="equity">36%</span> with two streets to come.</p>
+        <span class="btn">Check Answer</span>
+      </div>
+      <div class="fontnote">Serif body is great for long reading; can feel less "interactive". Card notation in serif is slightly weaker.</div>
+    </section>
+
+    <section class="spec D">
+      <header><h2>D · Computational</h2><span class="reg">Work Sans body + JetBrains Mono for notation, math &amp; numbers.</span></header>
+      <div class="stage">
+        <div class="kick">Equity &amp; the Rule of 2-and-4</div>
+        <h3>Counting your outs</h3>
+        <p>Equity is your hand’s chance of winning at showdown. With <span class="notation">Ah Kh</span> on a <span class="notation">Qh 8h 7c</span> flop, any heart completes your flush — that’s nine cards still unseen.</p>
+        <div class="math">P(flush) = P(turn) + P(river) − P(both) ≈ <span class="equity">36%</span></div>
+        <p>The Rule of 2-and-4 shortcuts this: <span class="notation">9 outs × 4</span> ≈ <span class="equity">36%</span> with two streets to come.</p>
+        <span class="btn">Check Answer</span>
+      </div>
+      <div class="fontnote">Mono makes notation &amp; numbers feel precise/tabular — fits a math tool. Risk: slightly "code editor" if overused.</div>
+    </section>
+
+  </div>
+</body>
+</html>

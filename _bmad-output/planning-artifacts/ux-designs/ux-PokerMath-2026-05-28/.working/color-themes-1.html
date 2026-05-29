@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PokerMath — Color Theme Options</title>
+<style>
+  /* ============================================================
+     PokerMath color theme exploration — casino felt + light sidebar
+     Four-color deck suits are FIXED by PRD (heart=red, diamond=blue,
+     club=green, spade=black) and shown on every card face.
+     ============================================================ */
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 32px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: #1a1a1a; color: #eee;
+  }
+  h1 { font-size: 22px; font-weight: 600; margin: 0 0 4px; }
+  .sub { color: #999; font-size: 13px; margin: 0 0 28px; }
+  .grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 28px; }
+  @media (max-width: 980px){ .grid { grid-template-columns: 1fr; } }
+
+  .theme { background: #232323; border: 1px solid #333; border-radius: 12px; overflow: hidden; }
+  .theme > header { padding: 14px 18px; border-bottom: 1px solid #333; }
+  .theme h2 { margin: 0 0 2px; font-size: 16px; }
+  .theme .reg { color: #aaa; font-size: 12px; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; padding: 14px 18px; }
+  .chip { display:flex; align-items:center; gap:7px; font-size: 11px; color:#ccc; }
+  .sw { width: 20px; height: 20px; border-radius: 5px; border: 1px solid rgba(255,255,255,.15); }
+
+  /* ---- realistic UI snippet: sidebar + assessment screen ---- */
+  .demo { margin: 4px 14px 16px; border-radius: 10px; overflow: hidden; display:grid; grid-template-columns: 150px 1fr; min-height: 300px; border:1px solid rgba(0,0,0,.3); }
+  .side { padding: 12px 10px; font-size: 11px; }
+  .side .navitem { padding: 7px 9px; border-radius: 6px; margin-bottom: 3px; line-height:1.25; }
+  .side .navitem small { display:block; opacity:.6; font-size: 9.5px; }
+  .side .sheets { margin-top: 14px; padding-top: 10px; border-top: 1px solid rgba(0,0,0,.12); opacity:.85; }
+  .side .sheets .sh { padding: 4px 9px; }
+  .main { padding: 16px 18px; }
+  .main .kicker { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; opacity:.7; }
+  .main h3 { margin: 3px 0 8px; font-size: 15px; }
+  .main p.q { font-size: 11.5px; line-height: 1.4; margin: 0 0 12px; }
+
+  .cards { display:flex; gap:6px; margin-bottom: 12px; }
+  .card { width: 38px; height: 54px; border-radius: 6px; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.35); display:flex; flex-direction:column; align-items:center; justify-content:center; font-weight:700; font-size: 13px; line-height:1; }
+  .card .suit { font-size: 16px; margin-top: 2px; }
+  .h { color:#d0322f; } .d { color:#2e6fd6; } .c { color:#1f9d55; } .s { color:#1a1a1a; }
+  .cards .label { align-self:center; font-size:10px; opacity:.7; margin: 0 4px; }
+
+  .fields { display:flex; gap:8px; margin-bottom: 12px; }
+  .field { font-size:10px; }
+  .field label { display:block; opacity:.7; margin-bottom:3px; }
+  .field .inp { width: 64px; height: 26px; border-radius: 5px; display:flex; align-items:center; padding:0 8px; font-size:11px; }
+
+  .btn { display:inline-block; padding: 8px 16px; border-radius: 7px; font-size: 12px; font-weight: 600; }
+  .feedback { margin-top: 12px; padding: 9px 11px; border-radius: 7px; font-size: 10.5px; line-height:1.35; }
+
+  .note { font-size: 10px; color:#888; padding: 0 18px 14px; }
+</style>
+</head>
+<body>
+  <h1>PokerMath — color theme options</h1>
+  <p class="sub">Casino felt main area · light sidebar · calm study tool. Each shows the Assessment screen (the busiest screen). Four-color deck suits are fixed by spec. Pick by register, not just hue — tell me a number.</p>
+
+  <div class="grid">
+
+    <!-- ============ THEME 1 ============
+      Classic Billiard Felt
+      felt:    #0f5132  (rich emerald billiard green)
+      feltDk:  #0a3d26
+      sidebar: #f5f1e8  (warm cream)
+      sideTxt: #2b2b2b
+      active:  #e7decb (active nav bg), text #0f5132
+      accent:  #c8a04a  (brass/gold) -> primary button
+      textOnFelt: #f3f0e9
+      success: #2f9e6b   hint: #d98a3d (amber, non-alarming)
+    -->
+    <section class="theme">
+      <header><h2>1 · Classic Billiard Felt</h2><span class="reg">Traditional, warm, table-room. Brass accents on emerald.</span></header>
+      <div class="chips">
+        <span class="chip"><span class="sw" style="background:#0f5132"></span>felt</span>
+        <span class="chip"><span class="sw" style="background:#f5f1e8"></span>sidebar</span>
+        <span class="chip"><span class="sw" style="background:#c8a04a"></span>accent/primary</span>
+        <span class="chip"><span class="sw" style="background:#2f9e6b"></span>success</span>
+        <span class="chip"><span class="sw" style="background:#d98a3d"></span>hint</span>
+      </div>
+      <div class="demo">
+        <div class="side" style="background:#f5f1e8; color:#2b2b2b;">
+          <div class="navitem">Introduction<small>poker &amp; notation</small></div>
+          <div class="navitem" style="background:#e7decb; color:#0f5132; font-weight:600;">Equity &amp; Rule of 2-and-4<small>LO1 · estimate equity</small></div>
+          <div class="navitem">Pot Odds<small>LO2</small></div>
+          <div class="navitem">Calling Profitably<small>LO3</small></div>
+          <div class="sheets"><div class="sh">52-card Deck</div><div class="sh">Hold ’Em Rules</div><div class="sh">Hand Rankings</div><div class="sh">Poker Jargon</div></div>
+        </div>
+        <div class="main" style="background:#0f5132; color:#f3f0e9;">
+          <div class="kicker">Equity · Assessment</div>
+          <h3>Estimate your equity</h3>
+          <p class="q">Opponent goes all-in on the flop. Use the Rule of 2-and-4.</p>
+          <div class="cards">
+            <span class="label">Hand</span>
+            <div class="card"><span>A</span><span class="suit h">&hearts;</span></div>
+            <div class="card"><span>K</span><span class="suit h">&hearts;</span></div>
+            <span class="label">Board</span>
+            <div class="card"><span>Q</span><span class="suit h">&hearts;</span></div>
+            <div class="card"><span>8</span><span class="suit h">&hearts;</span></div>
+            <div class="card"><span>7</span><span class="suit c">&clubs;</span></div>
+          </div>
+          <div class="fields">
+            <div class="field"><label>Outs</label><div class="inp" style="background:#0a3d26; color:#f3f0e9; border:1px solid #2f9e6b;">9</div></div>
+            <div class="field"><label>Streets</label><div class="inp" style="background:#0a3d26; color:#f3f0e9; border:1px solid rgba(255,255,255,.2);">2</div></div>
+            <div class="field"><label>Equity %</label><div class="inp" style="background:#0a3d26; color:#888; border:1px solid rgba(255,255,255,.2);">—</div></div>
+          </div>
+          <span class="btn" style="background:#c8a04a; color:#23170a;">Check Answer</span>
+          <div class="feedback" style="background:rgba(217,138,61,.18); border:1px solid #d98a3d; color:#f0d9be;">Re-count your outs — how many cards complete your draw?</div>
+        </div>
+      </div>
+      <p class="note">Reads most "card room." Gold can tip gambly if overused — kept to one button.</p>
+    </section>
+
+    <!-- ============ THEME 2 ============
+      Modern Study Felt
+      felt:    #14624a  (cleaner viridian green)
+      feltDk:  #0e4a38
+      sidebar: #fbfbfa  (near-white paper)
+      sideTxt: #1f2421
+      active:  #e3efe9 bg, text #14624a, 3px left bar #14624a
+      accent:  #1f6feb  (calm confident blue) -> primary
+      success: #18a06a   hint: #c8772a
+      textOnFelt: #f4f7f5
+    -->
+    <section class="theme">
+      <header><h2>2 · Modern Study Felt</h2><span class="reg">Clean, app-like, focused. Felt softened, blue primary = "academic", not casino.</span></header>
+      <div class="chips">
+        <span class="chip"><span class="sw" style="background:#14624a"></span>felt</span>
+        <span class="chip"><span class="sw" style="background:#fbfbfa"></span>sidebar</span>
+        <span class="chip"><span class="sw" style="background:#1f6feb"></span>accent/primary</span>
+        <span class="chip"><span class="sw" style="background:#18a06a"></span>success</span>
+        <span class="chip"><span class="sw" style="background:#c8772a"></span>hint</span>
+      </div>
+      <div class="demo">
+        <div class="side" style="background:#fbfbfa; color:#1f2421;">
+          <div class="navitem">Introduction<small>poker &amp; notation</small></div>
+          <div class="navitem" style="background:#e3efe9; color:#14624a; font-weight:600; border-left:3px solid #14624a;">Equity &amp; Rule of 2-and-4<small>LO1 · estimate equity</small></div>
+          <div class="navitem">Pot Odds<small>LO2</small></div>
+          <div class="navitem">Calling Profitably<small>LO3</small></div>
+          <div class="sheets"><div class="sh">52-card Deck</div><div class="sh">Hold ’Em Rules</div><div class="sh">Hand Rankings</div><div class="sh">Poker Jargon</div></div>
+        </div>
+        <div class="main" style="background:#14624a; color:#f4f7f5;">
+          <div class="kicker">Equity · Assessment</div>
+          <h3>Estimate your equity</h3>
+          <p class="q">Opponent goes all-in on the flop. Use the Rule of 2-and-4.</p>
+          <div class="cards">
+            <span class="label">Hand</span>
+            <div class="card"><span>A</span><span class="suit h">&hearts;</span></div>
+            <div class="card"><span>K</span><span class="suit h">&hearts;</span></div>
+            <span class="label">Board</span>
+            <div class="card"><span>Q</span><span class="suit h">&hearts;</span></div>
+            <div class="card"><span>8</span><span class="suit h">&hearts;</span></div>
+            <div class="card"><span>7</span><span class="suit c">&clubs;</span></div>
+          </div>
+          <div class="fields">
+            <div class="field"><label>Outs</label><div class="inp" style="background:#0e4a38; color:#f4f7f5; border:1px solid #18a06a;">9</div></div>
+            <div class="field"><label>Streets</label><div class="inp" style="background:#0e4a38; color:#f4f7f5; border:1px solid rgba(255,255,255,.2);">2</div></div>
+            <div class="field"><label>Equity %</label><div class="inp" style="background:#0e4a38; color:#888; border:1px solid rgba(255,255,255,.2);">—</div></div>
+          </div>
+          <span class="btn" style="background:#1f6feb; color:#fff;">Check Answer</span>
+          <div class="feedback" style="background:rgba(200,119,42,.2); border:1px solid #c8772a; color:#f3d9bd;">Re-count your outs — how many cards complete your draw?</div>
+        </div>
+      </div>
+      <p class="note">Blue primary risks competing with the blue diamond suit on cards — worth watching.</p>
+    </section>
+
+    <!-- ============ THEME 3 ============
+      Deep Table (high contrast)
+      felt:    #0b3d2c  (deep pine, almost black-green)
+      feltDk:  #07291d
+      sidebar: #eef0ee  (cool light gray)
+      sideTxt: #20262a
+      active:  #dfe6e2 bg, text #0b3d2c
+      accent:  #e0b24c  (soft gold) primary
+      success: #34b27a  hint: #e08a3c
+      textOnFelt: #eef2ef
+    -->
+    <section class="theme">
+      <header><h2>3 · Deep Table</h2><span class="reg">Darker, higher contrast, serious. Best legibility; least "fun".</span></header>
+      <div class="chips">
+        <span class="chip"><span class="sw" style="background:#0b3d2c"></span>felt</span>
+        <span class="chip"><span class="sw" style="background:#eef0ee"></span>sidebar</span>
+        <span class="chip"><span class="sw" style="background:#e0b24c"></span>accent/primary</span>
+        <span class="chip"><span class="sw" style="background:#34b27a"></span>success</span>
+        <span class="chip"><span class="sw" style="background:#e08a3c"></span>hint</span>
+      </div>
+      <div class="demo">
+        <div class="side" style="background:#eef0ee; color:#20262a;">
+          <div class="navitem">Introduction<small>poker &amp; notation</small></div>
+          <div class="navitem" style="background:#dfe6e2; color:#0b3d2c; font-weight:600;">Equity &amp; Rule of 2-and-4<small>LO1 · estimate equity</small></div>
+          <div class="navitem">Pot Odds<small>LO2</small></div>
+          <div class="navitem">Calling Profitably<small>LO3</small></div>
+          <div class="sheets"><div class="sh">52-card Deck</div><div class="sh">Hold ’Em Rules</div><div class="sh">Hand Rankings</div><div class="sh">Poker Jargon</div></div>
+        </div>
+        <div class="main" style="background:#0b3d2c; color:#eef2ef;">
+          <div class="kicker">Equity · Assessment</div>
+          <h3>Estimate your equity</h3>
+          <p class="q">Opponent goes all-in on the flop. Use the Rule of 2-and-4.</p>
+          <div class="cards">
+            <span class="label">Hand</span>
+            <div class="card"><span>A</span><span class="suit h">&hearts;</span></div>
+            <div class="card"><span>K</span><span class="suit h">&hearts;</span></div>
+            <span class="label">Board</span>
+            <div class="card"><span>Q</span><span class="suit h">&hearts;</span></div>
+            <div class="card"><span>8</span><span class="suit h">&hearts;</span></div>
+            <div class="card"><span>7</span><span class="suit c">&clubs;</span></div>
+          </div>
+          <div class="fields">
+            <div class="field"><label>Outs</label><div class="inp" style="background:#07291d; color:#eef2ef; border:1px solid #34b27a;">9</div></div>
+            <div class="field"><label>Streets</label><div class="inp" style="background:#07291d; color:#eef2ef; border:1px solid rgba(255,255,255,.2);">2</div></div>
+            <div class="field"><label>Equity %</label><div class="inp" style="background:#07291d; color:#888; border:1px solid rgba(255,255,255,.2);">—</div></div>
+          </div>
+          <span class="btn" style="background:#e0b24c; color:#241a07;">Check Answer</span>
+          <div class="feedback" style="background:rgba(224,138,60,.18); border:1px solid #e08a3c; color:#f2dabd;">Re-count your outs — how many cards complete your draw?</div>
+        </div>
+      </div>
+      <p class="note">Strongest contrast for the accessibility floor. Felt is nearly black — less "table", more "chalkboard".</p>
+    </section>
+
+    <!-- ============ THEME 4 ============
+      Felt & Ink (restrained, editorial)
+      felt:    #115e3f  (balanced emerald)
+      feltDk:  #0c462f
+      sidebar: #f3f4f1  (paper)
+      sideTxt: #23271f
+      active:  #e6ede7 bg, text #115e3f
+      accent:  #b23a3a  (deep card-red, ties to the deck) primary  -- single warm accent, no gold
+      success: #1d9b66  hint: #b8801f
+      textOnFelt: #f1f4ef
+    -->
+    <section class="theme">
+      <header><h2>4 · Felt &amp; Ink</h2><span class="reg">Editorial restraint. Primary = deep card-red drawn from the deck itself; no gold.</span></header>
+      <div class="chips">
+        <span class="chip"><span class="sw" style="background:#115e3f"></span>felt</span>
+        <span class="chip"><span class="sw" style="background:#f3f4f1"></span>sidebar</span>
+        <span class="chip"><span class="sw" style="background:#b23a3a"></span>accent/primary</span>
+        <span class="chip"><span class="sw" style="background:#1d9b66"></span>success</span>
+        <span class="chip"><span class="sw" style="background:#b8801f"></span>hint</span>
+      </div>
+      <div class="demo">
+        <div class="side" style="background:#f3f4f1; color:#23271f;">
+          <div class="navitem">Introduction<small>poker &amp; notation</small></div>
+          <div class="navitem" style="background:#e6ede7; color:#115e3f; font-weight:600;">Equity &amp; Rule of 2-and-4<small>LO1 · estimate equity</small></div>
+          <div class="navitem">Pot Odds<small>LO2</small></div>
+          <div class="navitem">Calling Profitably<small>LO3</small></div>
+          <div class="sheets"><div class="sh">52-card Deck</div><div class="sh">Hold ’Em Rules</div><div class="sh">Hand Rankings</div><div class="sh">Poker Jargon</div></div>
+        </div>
+        <div class="main" style="background:#115e3f; color:#f1f4ef;">
+          <div class="kicker">Equity · Assessment</div>
+          <h3>Estimate your equity</h3>
+          <p class="q">Opponent goes all-in on the flop. Use the Rule of 2-and-4.</p>
+          <div class="cards">
+            <span class="label">Hand</span>
+            <div class="card"><span>A</span><span class="suit h">&hearts;</span></div>
+            <div class="card"><span>K</span><span class="suit h">&hearts;</span></div>
+            <span class="label">Board</span>
+            <div class="card"><span>Q</span><span class="suit h">&hearts;</span></div>
+            <div class="card"><span>8</span><span class="suit h">&hearts;</span></div>
+            <div class="card"><span>7</span><span class="suit c">&clubs;</span></div>
+          </div>
+          <div class="fields">
+            <div class="field"><label>Outs</label><div class="inp" style="background:#0c462f; color:#f1f4ef; border:1px solid #1d9b66;">9</div></div>
+            <div class="field"><label>Streets</label><div class="inp" style="background:#0c462f; color:#f1f4ef; border:1px solid rgba(255,255,255,.2);">2</div></div>
+            <div class="field"><label>Equity %</label><div class="inp" style="background:#0c462f; color:#888; border:1px solid rgba(255,255,255,.2);">—</div></div>
+          </div>
+          <span class="btn" style="background:#b23a3a; color:#fff;">Check Answer</span>
+          <div class="feedback" style="background:rgba(184,128,31,.2); border:1px solid #b8801f; color:#f0debb;">Re-count your outs — how many cards complete your draw?</div>
+        </div>
+      </div>
+      <p class="note">Red primary is bold but could read as "danger/wrong" — worth a gut check against the hint state.</p>
+    </section>
+
+  </div>
+</body>
+</html>

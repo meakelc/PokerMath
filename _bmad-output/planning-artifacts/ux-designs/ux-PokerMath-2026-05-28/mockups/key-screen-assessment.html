@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PokerMath — Assessment screen (assembled) + card styles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --felt:#0b3d2c; --felt-deep:#07291d; --felt-panel:#0e4a36;
+    --txt:#eef2ef; --txt-dim:#a9c2b6;
+    --gold:#e0b24c; --gold-deep:#c8973a;
+    --sidebar:#eef0ee; --sidebar-txt:#20262a; --sidebar-active:#dfe6e2;
+    --success:#34b27a; --hint:#e08a3c;
+    --h:#d0322f; --d:#2e6fd6; --c:#1f9d55; --s:#1a1a1a;
+    --r-sm:6px; --r-md:9px; --r-card:8px;
+    --shadow-card:0 2px 6px rgba(0,0,0,.35), 0 6px 16px rgba(0,0,0,.22);
+    --shadow-panel:0 4px 20px rgba(0,0,0,.28);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;padding:28px;background:#141414;color:#ddd;font-family:Inter,system-ui,sans-serif;}
+  h1{font-size:20px;font-weight:600;margin:0 0 4px;color:#eee;}
+  .sub{color:#999;font-size:13px;margin:0 0 22px;max-width:70ch;}
+  .mono{font-family:"JetBrains Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;}
+
+  /* ===================== CARD STYLES ===================== */
+  .cardrow-wrap{background:#202020;border:1px solid #333;border-radius:12px;padding:16px 18px;margin-bottom:26px;}
+  .cardrow-wrap h2{font-size:14px;margin:0 0 12px;color:#eee;}
+  .variants{display:flex;gap:34px;flex-wrap:wrap;}
+  .variant{text-align:center;}
+  .variant .vname{font-size:11px;color:#aaa;margin-top:10px;}
+  .feltbg{background:var(--felt);padding:16px 18px;border-radius:10px;display:flex;gap:8px;}
+
+  .pc{background:#fff;border-radius:var(--r-card);box-shadow:var(--shadow-card);position:relative;width:58px;height:84px;font-family:"JetBrains Mono",monospace;font-weight:600;}
+  .pc .h{color:var(--h);} .pc .d{color:var(--d);} .pc .c{color:var(--c);} .pc .s{color:var(--s);}
+
+  /* Style 1: classic corner index (rank+suit TL, mirrored BR) + center pip */
+  .s1 .idx{position:absolute;font-size:13px;line-height:1;display:flex;flex-direction:column;align-items:center;}
+  .s1 .idx.tl{top:6px;left:7px;} .s1 .idx.br{bottom:6px;right:7px;transform:rotate(180deg);}
+  .s1 .idx .sm{font-size:13px;margin-top:1px;}
+  .s1 .center{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:30px;}
+
+  /* Style 2: minimal top-label only + large center symbol */
+  .s2 .top{position:absolute;top:8px;left:9px;font-size:15px;line-height:1;}
+  .s2 .center{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:30px;}
+
+  /* Style 3: stacked center, rank over suit, no corner indices */
+  .s3 .stack{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;}
+  .s3 .stack .rk{font-size:24px;line-height:1;} .s3 .stack .su{font-size:24px;line-height:1;}
+
+  /* ===================== ASSEMBLED SCREEN ===================== */
+  .app{display:grid;grid-template-columns:248px 1fr;border-radius:14px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.5);min-height:560px;max-width:1080px;}
+
+  /* sidebar */
+  .side{background:var(--sidebar);color:var(--sidebar-txt);padding:20px 16px;display:flex;flex-direction:column;}
+  .brand{font-family:"Fraunces",serif;font-weight:600;font-size:19px;color:var(--felt);display:flex;align-items:center;gap:8px;margin-bottom:20px;}
+  .brand .chip{width:14px;height:14px;border-radius:3px;background:var(--gold);box-shadow:inset 0 0 0 2px rgba(0,0,0,.15);}
+  .navlabel{font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:#8a938c;margin:0 6px 8px;}
+  .nav .item{padding:10px 11px;border-radius:var(--r-sm);margin-bottom:4px;cursor:default;position:relative;}
+  .nav .item .t{font-size:13.5px;font-weight:500;line-height:1.25;}
+  .nav .item .s{font-size:11px;color:#79847c;margin-top:1px;}
+  .nav .item.done .t::after{content:" ✓";color:var(--gold-deep);font-weight:700;}
+  .nav .item.active{background:var(--sidebar-active);}
+  .nav .item.active::before{content:"";position:absolute;left:0;top:6px;bottom:6px;width:3px;border-radius:2px;background:var(--gold);}
+  .nav .item.active .t{color:var(--felt);font-weight:600;}
+  .sheets{margin-top:auto;padding-top:16px;border-top:1px solid #dcdfda;}
+  .sheets .item{padding:6px 11px;font-size:12.5px;color:#3a423c;display:flex;align-items:center;gap:8px;}
+  .sheets .item::before{content:"›";color:#9aa39b;}
+
+  /* main felt */
+  .main{background:var(--felt);color:var(--txt);padding:34px 40px;display:flex;flex-direction:column;}
+  .kick{font-family:Inter;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:8px;}
+  .main h2{font-family:"Fraunces",serif;font-weight:600;font-size:30px;margin:0 0 6px;letter-spacing:-.01em;}
+  .prompt{font-size:15px;line-height:1.55;color:var(--txt);margin:0 0 22px;max-width:60ch;}
+
+  .felt-zone{display:flex;gap:30px;margin-bottom:22px;align-items:flex-start;flex-wrap:wrap;}
+  .group .glabel{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--txt-dim);margin-bottom:8px;}
+  .cards{display:flex;gap:8px;}
+
+  /* panel that lifts off felt */
+  .panel{background:var(--felt-panel);border-radius:var(--r-md);box-shadow:var(--shadow-panel);padding:20px 22px;max-width:520px;border:1px solid rgba(255,255,255,.06);}
+  .fields{display:flex;gap:16px;margin-bottom:18px;flex-wrap:wrap;}
+  .field label{display:block;font-size:11.5px;color:var(--txt-dim);margin-bottom:6px;}
+  .field .input{width:96px;height:40px;border-radius:var(--r-sm);background:var(--felt-deep);border:1px solid rgba(255,255,255,.16);color:var(--txt);display:flex;align-items:center;padding:0 12px;font-family:"JetBrains Mono",monospace;font-size:15px;}
+  .field .input.filled{border-color:var(--gold);}
+  .field .input.empty{color:#5e7a6d;}
+  .field .suffix{color:var(--txt-dim);}
+  .actions{display:flex;align-items:center;gap:14px;}
+  .btn{padding:11px 22px;border-radius:var(--r-sm);font-weight:600;font-size:14px;font-family:Inter;cursor:default;}
+  .btn.primary{background:var(--gold);color:#241a07;box-shadow:0 1px 0 var(--gold-deep);}
+  .btn.ghost{background:transparent;color:var(--txt-dim);border:1px solid rgba(255,255,255,.2);}
+
+  .feedback{margin-top:18px;border-radius:var(--r-sm);padding:13px 15px;font-size:13.5px;line-height:1.45;display:flex;gap:10px;max-width:520px;}
+  .feedback.hint{background:rgba(224,138,60,.14);border:1px solid var(--hint);color:#f3d9bd;}
+  .feedback.hint .ic{color:var(--hint);font-weight:700;}
+  .feedback .ic{flex:none;}
+
+  .footer-nav{margin-top:auto;display:flex;justify-content:space-between;padding-top:26px;}
+  .pager{display:flex;gap:10px;}
+  .note{font-size:11px;color:#777;margin-top:8px;}
+</style>
+</head>
+<body>
+  <h1>PokerMath — assembled Assessment screen + card-style options</h1>
+  <p class="sub">All locked tokens applied: Deep Table felt, gold leaned in, Fraunces headings, Inter body, JetBrains Mono for notation/values, soft rounding, tactile shadows, comfortable density. <b>First pick the playing-card style</b> (top), then react to the full screen below.</p>
+
+  <!-- CARD STYLE CHOOSER -->
+  <div class="cardrow-wrap">
+    <h2>Playing-card styles — which reads cleanest? (suits stay four-color: ♥ red · ♦ blue · ♣ green · ♠ black)</h2>
+    <div class="variants">
+      <div class="variant">
+        <div class="feltbg">
+          <div class="pc s1"><span class="idx tl"><span>A</span><span class="sm h">&hearts;</span></span><span class="center h">&hearts;</span><span class="idx br"><span>A</span><span class="sm h">&hearts;</span></span></div>
+          <div class="pc s1"><span class="idx tl"><span>7</span><span class="sm c">&clubs;</span></span><span class="center c">&clubs;</span><span class="idx br"><span>7</span><span class="sm c">&clubs;</span></span></div>
+        </div>
+        <div class="vname"><b>Style 1 · Classic</b><br>corner index + center pip</div>
+      </div>
+      <div class="variant">
+        <div class="feltbg">
+          <div class="pc s2"><span class="top"><span>A</span><span class="h">&hearts;</span></span><span class="center h">&hearts;</span></div>
+          <div class="pc s2"><span class="top"><span>7</span><span class="c">&clubs;</span></span><span class="center c">&clubs;</span></div>
+        </div>
+        <div class="vname"><b>Style 2 · Minimal</b><br>top label + center symbol</div>
+      </div>
+      <div class="variant">
+        <div class="feltbg">
+          <div class="pc s3"><span class="stack"><span class="rk">A</span><span class="su h">&hearts;</span></span></div>
+          <div class="pc s3"><span class="stack"><span class="rk">7</span><span class="su c">&clubs;</span></span></div>
+        </div>
+        <div class="vname"><b>Style 3 · Stacked</b><br>rank over suit, centered</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ASSEMBLED SCREEN (uses Style 1 cards) -->
+  <div class="app">
+    <aside class="side">
+      <div class="brand"><span class="chip"></span> PokerMath</div>
+      <div class="navlabel">Sections</div>
+      <div class="nav">
+        <div class="item done"><div class="t">Introduction</div><div class="s">Poker &amp; hand notation</div></div>
+        <div class="item active"><div class="t">Equity &amp; the Rule of 2-and-4</div><div class="s">LO1 · estimate your equity</div></div>
+        <div class="item"><div class="t">Pot Odds</div><div class="s">LO2 · price of a call</div></div>
+        <div class="item"><div class="t">Calling Profitably</div><div class="s">LO3 · is the call +EV?</div></div>
+      </div>
+      <div class="sheets">
+        <div class="navlabel" style="margin-left:0;">Cheat Sheets</div>
+        <div class="item">The 52-card Deck</div>
+        <div class="item">Texas Hold ’Em Rules</div>
+        <div class="item">Hand Rankings</div>
+        <div class="item">Poker Jargon</div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="kick">Equity &amp; the Rule of 2-and-4 · Assessment</div>
+      <h2>Estimate your equity</h2>
+      <p class="prompt">Your opponent goes all-in on the flop. Using the Rule of 2-and-4, estimate your hand’s equity. Count your outs from the cards shown.</p>
+
+      <div class="felt-zone">
+        <div class="group">
+          <div class="glabel">Your hand</div>
+          <div class="cards">
+            <div class="pc s1"><span class="idx tl"><span>A</span><span class="sm h">&hearts;</span></span><span class="center h">&hearts;</span><span class="idx br"><span>A</span><span class="sm h">&hearts;</span></span></div>
+            <div class="pc s1"><span class="idx tl"><span>K</span><span class="sm h">&hearts;</span></span><span class="center h">&hearts;</span><span class="idx br"><span>K</span><span class="sm h">&hearts;</span></span></div>
+          </div>
+        </div>
+        <div class="group">
+          <div class="glabel">The flop</div>
+          <div class="cards">
+            <div class="pc s1"><span class="idx tl"><span>Q</span><span class="sm h">&hearts;</span></span><span class="center h">&hearts;</span><span class="idx br"><span>Q</span><span class="sm h">&hearts;</span></span></div>
+            <div class="pc s1"><span class="idx tl"><span>8</span><span class="sm h">&hearts;</span></span><span class="center h">&hearts;</span><span class="idx br"><span>8</span><span class="sm h">&hearts;</span></span></div>
+            <div class="pc s1"><span class="idx tl"><span>7</span><span class="sm c">&clubs;</span></span><span class="center c">&clubs;</span><span class="idx br"><span>7</span><span class="sm c">&clubs;</span></span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="fields">
+          <div class="field"><label>Outs</label><div class="input filled mono">9</div></div>
+          <div class="field"><label>Streets to come</label><div class="input filled mono">2</div></div>
+          <div class="field"><label>Equity</label><div class="input empty mono">— %</div></div>
+        </div>
+        <div class="actions">
+          <span class="btn primary">Check Answer</span>
+        </div>
+        <div class="feedback hint"><span class="ic">!</span><span>Re-count your outs — how many unseen cards complete your flush draw?</span></div>
+      </div>
+
+      <div class="footer-nav">
+        <span class="btn ghost">← Back</span>
+        <span class="btn ghost">Next →</span>
+      </div>
+    </main>
+  </div>
+  <p class="note">Assembled screen uses Style 1 cards. Hint state shown for reference; success state will be a green-bordered confirmation (not shown here).</p>
+</body>
+</html>
