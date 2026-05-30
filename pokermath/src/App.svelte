@@ -13,7 +13,7 @@
   <Sidebar />
 
   <main class="main">
-    {#if active.kind === 'informational' && sectionContent[active.id]}
+    {#if sectionContent[active.id]}
       <InformationalScreen
         sectionId={active.id}
         title={active.title}
@@ -21,8 +21,8 @@
         content={sectionContent[active.id]!}
       />
     {:else}
-      <!-- TEMPORARY: assessment Sections get their AssessmentScreen in Epic 3.
-           Until then, keep the title + Pager so the shell stays navigable end-to-end. -->
+      <!-- TEMPORARY: Sections with no content component registered yet.
+           Epic 3 replaces this with AssessmentScreen for assessment-kind sections. -->
       {#key active.id}
         <div class="section-head">
           <h1 class="section-title">{active.title}</h1>
