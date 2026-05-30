@@ -1,5 +1,13 @@
 # Deferred Work
 
+## Deferred from: code review of 2-2-informational-screen-archetype (2026-05-30)
+
+- `parseCard` called at module-eval time in `IntroContent.svelte` with no error boundary — `content/sections/IntroContent.svelte:11`; current hardcoded literals (`Ah`, `Tc`) are valid; a typo on any future card literal throws synchronously during component instantiation and tears down the component tree with a blank screen.
+- Informational section in `sections.ts` with no matching `sectionContent` entry silently renders the assessment fallback (title + Pager, no prose) — `App.svelte:16`; the `{#if … && sectionContent[active.id]}` guard is intentional; a registry-completeness check is desirable but deferred per deferred-work.md:46.
+- Empty `CardGroup` (`cards = []` default now reachable) renders a visible label with no cards beneath it — `CardGroup.svelte:5,9-13`; no current consumer hits this state; add an empty-state guard (hide group or show placeholder) when a real consumer needs `cards` to be optional.
+- `appState.currentSection` unbounded — any write outside `[0, sections.length-1]` makes `active` `undefined` and crashes every `active.*` access in `App.svelte` — `App.svelte:9`; Pager clamps its own handlers; the guard belongs at the state write-site or derivation; pre-existing from Epic 1.
+- `{#key sectionId}` in `InformationalScreen` re-mounts the slotted `Content` component on every section switch — `InformationalScreen.svelte:19-30`; stateless for current `IntroContent`; any future content component using `onMount`, async effects, or local state will have those silently reset on navigation.
+
 ## Deferred from: code review of 2-1-card-notation-graphical-card-rendering (2026-05-29)
 
 - Duplicate card keys crash `CardGroup` keyed `{#each}` — `CardGroup.svelte:11`; in poker cards are unique per deck so same-card duplicates are an authoring bug; add upstream dedup guard or uniqueness assertion when content authors build groups in Story 2.2.

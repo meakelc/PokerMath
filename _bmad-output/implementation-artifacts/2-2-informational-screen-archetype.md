@@ -4,7 +4,7 @@ baseline_commit: 2da472b
 
 # Story 2.2: Informational screen archetype
 
-Status: review
+Status: done
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
@@ -367,6 +367,15 @@ claude-sonnet-4-6
 - `_bmad-output/implementation-artifacts/sprint-status.yaml` — MODIFIED
 - `_bmad-output/implementation-artifacts/2-2-informational-screen-archetype.md` — MODIFIED (this file)
 
+### Review Findings
+
+- [x] [Review][Defer] `parseCard` called at module-eval time with no error boundary [content/sections/IntroContent.svelte:11] — deferred, pre-existing
+- [x] [Review][Defer] Informational section missing from registry silently falls to assessment fallback (no content shown, no warning) [App.svelte:16] — deferred, pre-existing
+- [x] [Review][Defer] Empty `CardGroup` (`cards = []` default) renders dangling label with no cards beneath it [CardGroup.svelte:5] — deferred, pre-existing
+- [x] [Review][Defer] `appState.currentSection` unbounded — out-of-range index crashes `active.*` access [App.svelte:9] — deferred, pre-existing
+- [x] [Review][Defer] `{#key sectionId}` re-mounts slotted `Content` on every section switch — unguarded for future stateful content components [InformationalScreen.svelte:19] — deferred, pre-existing
+
 ## Change Log
 
 - 2026-05-30: Story 2.2 implemented — InformationalScreen archetype, content registry, IntroContent placeholder, App.svelte branching, CardGroup default. All ACs satisfied; check/test/build green; visual pass confirmed.
+- 2026-05-30: Code review complete — 0 decision-needed, 0 patch, 5 deferred, 8 dismissed.
