@@ -2,11 +2,14 @@
   import { appState } from './lib/appState.svelte'
   import { sections } from './content/sections'
   import { sectionContent } from './content/sections/index'
+  import { cheatSheets } from './content/cheatsheets'
   import Sidebar from './lib/components/Sidebar.svelte'
   import Pager from './lib/components/Pager.svelte'
   import InformationalScreen from './screens/InformationalScreen.svelte'
+  import CheatSheetModal from './lib/components/CheatSheetModal.svelte'
 
   const active = $derived(sections[appState.currentSection])
+  const openSheet = $derived(cheatSheets.find((s) => s.id === appState.openCheatSheet))
 </script>
 
 <div class="app">
@@ -34,7 +37,15 @@
   </main>
 </div>
 
-<div class="modal-layer"></div>
+<div class="modal-layer">
+  {#if openSheet}
+    <CheatSheetModal title={openSheet.title} onclose={() => (appState.openCheatSheet = null)}>
+      <!-- TEMPORARY (Story 2.7): real sheet content arrives in Story 2.8.
+           2.8 replaces this with the registered content component for openSheet.id. -->
+      <p class="cs-placeholder">This reference sheet is coming together — its content arrives shortly.</p>
+    </CheatSheetModal>
+  {/if}
+</div>
 
 <style>
   .app {
@@ -77,5 +88,11 @@
     position: fixed;
     inset: 0;
     pointer-events: none;
+  }
+
+  .cs-placeholder {
+    font: var(--font-body-md);
+    color: var(--color-sidebar-text-dim);
+    margin: 0;
   }
 </style>

@@ -1,6 +1,7 @@
 <script lang="ts">
   import { appState } from '../appState.svelte'
   import { sections } from '../../content/sections'
+  import { cheatSheets } from '../../content/cheatsheets'
   import SidebarNavItem from './SidebarNavItem.svelte'
 </script>
 
@@ -19,6 +20,20 @@
       />
     {/each}
   </nav>
+
+  <div class="sheets">
+    <span class="navlabel">Cheat Sheets</span>
+    {#each cheatSheets as sheet (sheet.id)}
+      <button
+        type="button"
+        class="sheet"
+        onclick={() => (appState.openCheatSheet = sheet.id)}
+      >
+        <span class="chevron" aria-hidden="true">›</span>
+        {sheet.title}
+      </button>
+    {/each}
+  </div>
 </aside>
 
 <style>
@@ -48,5 +63,38 @@
   .nav {
     display: flex;
     flex-direction: column;
+  }
+
+  .sheets {
+    margin-top: auto;
+    border-top: 1px solid var(--color-sidebar-border);
+    padding-top: var(--space-3);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sheet {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    width: 100%;
+    text-align: left;
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-sm);
+    background: none;
+    border: 0;
+    cursor: pointer;
+    font: var(--font-caption);
+    color: var(--color-sidebar-text);
+  }
+
+  .sheet:hover {
+    background: var(--color-sidebar-active);
+  }
+
+  .chevron {
+    color: var(--color-sidebar-text-dim);
+    font-size: 1.1em;
+    line-height: 1;
   }
 </style>

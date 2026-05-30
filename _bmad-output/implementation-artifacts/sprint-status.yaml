@@ -35,7 +35,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 
 generated: 2026-05-29
-last_updated: 2026-05-30  # Story 2.6 → review
+last_updated: 2026-05-30  # Story 2.7 → review
 project: PokerMath
 project_key: NOKEY
 tracking_system: file-system
@@ -60,7 +60,7 @@ development_status:
   2-4-equity-lo1-instructional-content: review
   2-5-pot-odds-lo2-instructional-content: review
   2-6-calling-profitably-lo3-instructional-content: review
-  2-7-cheat-sheet-panel-modal-mechanism: backlog
+  2-7-cheat-sheet-panel-modal-mechanism: review
   2-8-cheat-sheet-content-four-sheets: backlog
   epic-2-retrospective: optional
 
