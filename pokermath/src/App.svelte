@@ -2,6 +2,7 @@
   import { appState } from './lib/appState.svelte'
   import { sections } from './content/sections'
   import Sidebar from './lib/components/Sidebar.svelte'
+  import Pager from './lib/components/Pager.svelte'
 
   const active = $derived(sections[appState.currentSection])
 </script>
@@ -12,6 +13,7 @@
   <main class="main">
     <h1 class="section-title">{active.title}</h1>
     <p class="section-subtitle">{active.subtitle}</p>
+    <Pager />
   </main>
 </div>
 
@@ -25,6 +27,8 @@
   }
 
   .main {
+    display: flex;
+    flex-direction: column;
     background: var(--color-felt);
     padding: var(--space-content-pad);
   }
