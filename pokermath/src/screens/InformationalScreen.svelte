@@ -77,6 +77,14 @@
     margin-top: var(--space-4);
   }
 
+  .prose :global(p + .group) {
+    margin-top: var(--space-4);
+  }
+
+  .prose :global(.group + p) {
+    margin-top: var(--space-4);
+  }
+
   .prose :global(strong) {
     font-weight: 600;
     color: var(--color-text-on-felt);

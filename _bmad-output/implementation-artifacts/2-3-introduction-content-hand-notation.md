@@ -4,7 +4,7 @@ baseline_commit: 940cb5e
 
 # Story 2.3: Introduction content & hand notation
 
-Status: review
+Status: done
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
@@ -86,6 +86,11 @@ so that I can read every later Section fluently.
     - **Reload:** returns to Introduction, state cleared; quiet section fade still plays; no spinner/celebratory motion. (FR-3, UX-DR18) [Source: EXPERIENCE.md:74; global.css:21-29]
     - **Keyboard:** Tab reaches Pager + sidebar with a visible focus ring; full shell operable without a mouse. (no regression) [Source: 1-6-…md; NFR-2]
   - [x] Record exact command outputs + the visual-pass result in Dev Agent Record → Completion Notes.
+
+### Review Findings
+
+- [x] [Review][Patch] Prose spacing incomplete — `.prose :global(p + p)` only fires between adjacent `<p>` elements; the 4 `p→group` and `group→p` boundaries in `IntroContent` all render with zero spacing [InformationalScreen.svelte] — fixed: added `.prose :global(p + .group)` and `.prose :global(.group + p)` rules
+- [x] [Review][Defer] `parseCard` module-eval error boundary [IntroContent.svelte:4-5] — deferred, pre-existing (already tracked in deferred-work.md: "Deferred from: code review of 2-2-informational-screen-archetype")
 
 ## Dev Notes
 
