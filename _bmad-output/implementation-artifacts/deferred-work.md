@@ -4,7 +4,7 @@
 
 - Duplicate card keys crash `CardGroup` keyed `{#each}` — `CardGroup.svelte:11`; in poker cards are unique per deck so same-card duplicates are an authoring bug; add upstream dedup guard or uniqueness assertion when content authors build groups in Story 2.2.
 - RANKS/SUITS arrays duplicated in `cards.test.ts` instead of imported from `cards.ts` — `cards.test.ts:64-65`; divergence risk if source arrays change; export `RANKS`/`SUITS` from `cards.ts` and import in test when convenient.
-- `CardGroup` `cards` prop has no default value — `CardGroup.svelte:5`; `svelte-check` catches missing required prop at build time; add `= []` default when first consumer is wired in Story 2.2.
+- ~~`CardGroup` `cards` prop has no default value~~ — **RESOLVED in Story 2.2**: added `cards = []` default at `CardGroup.svelte:5`.
 - `PlayingCard` `width: 60px` + `aspect-ratio` has no overflow handling — `PlayingCard.svelte:21-22`; no overflow scenario with current token values; add `overflow: hidden` or tune width if `--font-value-lg` changes in a future story.
 
 ## Deferred from: code review of 1-6-keyboard-operability-visible-focus-restrained-motion-baseline (2026-05-29)

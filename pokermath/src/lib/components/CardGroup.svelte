@@ -2,7 +2,7 @@
   import { type Card, cardToString } from '../cards'
   import PlayingCard from './PlayingCard.svelte'
 
-  let { cards, label }: { cards: Card[]; label: string } = $props()
+  let { cards = [], label }: { cards?: Card[]; label: string } = $props()
 </script>
 
 <div class="group">
