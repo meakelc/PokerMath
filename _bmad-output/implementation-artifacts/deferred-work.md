@@ -1,5 +1,11 @@
 # Deferred Work
 
+## Deferred from: code review of 1-6-keyboard-operability-visible-focus-restrained-motion-baseline (2026-05-29)
+
+- Reduced-motion guard doesn't zero `animation-delay`/`transition-delay` — `global.css:21-29`; no animation or transition currently uses a delay; add `animation-delay: 0ms !important; transition-delay: 0ms !important;` to the `@media prefers-reduced-motion` block when Epic 2 introduces its first delayed transition.
+- `{#key active.id}` remount will lose focus when interactive content is placed inside the keyed block — `App.svelte:14-19`; no interactive elements inside `.section-head` currently; when Epic 2 extends the `{#key}` scope to wrap full screen content, add focus-restore logic (e.g., `focus()` the screen heading on mount).
+
+
 ## Deferred from: code review of 1-5-back-next-pager (2026-05-29)
 
 - `Pager.svelte` `<button>` elements lack individual `aria-label` — `Pager.svelte:19,23`; visible text "← Back"/"Next →" is sufficient for now; full ARIA audit (aria-label, focus-ring, heading hierarchy) is Story 1.6 scope.

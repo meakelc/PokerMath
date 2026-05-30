@@ -39,6 +39,7 @@
 
   .section-head {
     animation: section-fade var(--motion-fast) var(--motion-ease);
+    animation-fill-mode: backwards;
   }
 
   @keyframes section-fade {

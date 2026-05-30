@@ -4,7 +4,7 @@ baseline_commit: 49821fb
 
 # Story 1.6: Keyboard operability, visible focus & restrained-motion baseline
 
-Status: review
+Status: done
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
@@ -291,6 +291,12 @@ None.
 - `pokermath/src/App.svelte` — MODIFIED (`{#key active.id}` + `.section-head` CSS fade)
 - `pokermath/src/lib/components/Pager.svelte` — MODIFIED (arrow glyphs wrapped in `aria-hidden` spans)
 - `pokermath/src/lib/components/SidebarNavItem.svelte` — VERIFIED only (no change needed)
+
+### Review Findings
+
+- [x] [Review][Patch] Missing `animation-fill-mode: backwards` on `.section-head` — without it, a theoretical one-frame opacity:1 flash can occur before the CSS animation's `from { opacity:0 }` state takes hold on mount. `fill-mode: backwards` applies the `from` state before the first paint, which is the standard pattern for mount animations and costs nothing. [pokermath/src/App.svelte:40-42]
+- [x] [Review][Defer] Reduced-motion guard doesn't zero `animation-delay` or `transition-delay` [pokermath/src/styles/global.css:21-29] — deferred, pre-existing; no current animation or transition uses a delay; add `animation-delay: 0ms !important; transition-delay: 0ms !important;` to the guard when Epic 2 introduces its first delayed transition
+- [x] [Review][Defer] `{#key active.id}` wraps only the head placeholder — when Epic 2 adds interactive content to the main area and the keyed block is extended, focus will be lost on section switch [pokermath/src/App.svelte:14-19] — deferred, pre-existing; no interactive elements inside the keyed block currently; address in Epic 2 when screen archetypes are built
 
 ## Change Log
 
