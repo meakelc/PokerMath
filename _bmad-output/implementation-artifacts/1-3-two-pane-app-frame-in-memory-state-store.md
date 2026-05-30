@@ -4,7 +4,7 @@ baseline_commit: 879eb1dc96404247f63c6d7599837dbbc71a0d13
 
 # Story 1.3: Two-pane app frame & in-memory state store
 
-Status: review
+Status: done
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
@@ -235,3 +235,13 @@ None — clean implementation, no regressions.
 ## Change Log
 
 - 2026-05-29: Story 1.3 implemented — two-pane app frame, in-memory state store, reactive section selection. Added `sections.ts`, `appState.svelte.ts`, `sections.test.ts`; rewrote `App.svelte`. All 5 ACs satisfied; 5 tests passing; build clean.
+
+### Review Findings
+
+- [x] [Review][Patch] `.wordmark` uses hardcoded `letter-spacing: -0.01em` instead of `var(--tracking-display-lg)` [App.svelte:38]
+- [x] [Review][Defer] `active` is `undefined` when `currentSection` is out-of-range — no bounds check [App.svelte:5] — deferred, belongs with Story 1.4/1.5 when nav controls are added
+- [x] [Review][Defer] `appState.currentSection` has no type or value guard on writes [appState.svelte.ts:3] — deferred, belongs with Story 1.4/1.5
+- [x] [Review][Defer] `noUncheckedIndexedAccess` not enabled — TypeScript masks `Section | undefined` on index access [tsconfig.app.json] — deferred, pre-existing config decision
+- [x] [Review][Defer] `modal-layer` `pointer-events: none` at container level silently blocks future child interactive elements [App.svelte:62] — deferred, document when Story 2.7 adds modal content
+- [x] [Review][Defer] ARIA / semantic HTML — `<span>` wordmark, no `aria-label` on `<aside>`, `<h1>` heading hierarchy [App.svelte:9-10,14] — deferred, Story 1.6 scope
+- [x] [Review][Defer] No `overflow` handling on `.side`/`.main` panels [App.svelte:28,41] — deferred, pre-existing layout concern; address when content overflows

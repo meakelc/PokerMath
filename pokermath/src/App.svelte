@@ -35,7 +35,7 @@
   .wordmark {
     font: var(--font-heading-sm);
     color: var(--color-sidebar-text);
-    letter-spacing: -0.01em;
+    letter-spacing: var(--tracking-display-lg);
   }
 
   .main {

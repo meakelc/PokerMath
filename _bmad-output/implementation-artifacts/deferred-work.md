@@ -1,5 +1,14 @@
 # Deferred Work
 
+## Deferred from: code review of 1-3-two-pane-app-frame-in-memory-state-store (2026-05-29)
+
+- `active` is `undefined` when `currentSection` is out-of-range — no bounds check on `sections[appState.currentSection]` in `App.svelte:5`; fix belongs with Story 1.4/1.5 when nav controls are added.
+- `appState.currentSection` has no type or value guard on writes — `appState.svelte.ts:3`; any caller can set an arbitrary integer; fix belongs with Story 1.4/1.5.
+- `noUncheckedIndexedAccess` not enabled in `tsconfig.app.json` — TypeScript reports `Section` (not `Section | undefined`) on array index access, masking the out-of-range risk; pre-existing config decision.
+- `modal-layer` `pointer-events: none` at container level silently blocks future child interactive elements — `App.svelte:62`; document this caveat when Story 2.7 adds modal content so that component sets `pointer-events: auto` on the modal itself.
+- ARIA / semantic HTML — `<span>` wordmark has no heading role, `<aside>` has no `aria-label`, `<h1>` heading hierarchy inverted (wordmark should be `<h1>`, section title `<h2>`) — `App.svelte:9-10,14`; Story 1.6 scope.
+- No `overflow` handling on `.side`/`.main` panels — `App.svelte:28,41`; content will bleed out of `100vh` container when long; address in a future layout story.
+
 ## Deferred from: code review of 1-2-deep-table-design-token-layer (2026-05-29)
 
 - Google Fonts offline/blocked — silent font degradation [pokermath/index.html:6-8] — acknowledged tradeoff per spec; fallback stacks (`serif`/`sans-serif`/`monospace`) present in all font tokens. Revisit if true offline fidelity is required (would need `@fontsource` self-hosting).
