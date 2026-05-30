@@ -1,5 +1,9 @@
 # Deferred Work
 
+## Deferred from: code review of 1-5-back-next-pager (2026-05-29)
+
+- `Pager.svelte` `<button>` elements lack individual `aria-label` — `Pager.svelte:19,23`; visible text "← Back"/"Next →" is sufficient for now; full ARIA audit (aria-label, focus-ring, heading hierarchy) is Story 1.6 scope.
+
 ## Deferred from: code review of 1-4-sidebar-section-index-free-navigation (2026-05-29)
 
 - Out-of-bounds `currentSection` produces `undefined` active — `App.svelte:6`, `Sidebar.svelte:17`; Story 1.5 pager will constrain all writes to valid indices (0–3); no speculative guard here per spec.

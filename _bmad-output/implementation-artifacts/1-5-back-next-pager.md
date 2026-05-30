@@ -4,7 +4,7 @@ baseline_commit: ac08601
 
 # Story 1.5: Back/Next pager
 
-Status: review
+Status: done
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
@@ -75,6 +75,10 @@ so that I can step through the four Sections in order without using the sidebar.
   - [x] In `pokermath/src/App.svelte`: `import Pager from './lib/components/Pager.svelte'` and render `<Pager />` as the **last child of `<main class="main">`**, after the title/subtitle placeholder. The pager lives inside the scrolling content region, not the frame chrome. [Source: pokermath/src/App.svelte:12-15; architecture.md:428 (archetypes host the Pager inside the content screen)]
   - [x] Make `.main` a vertical flex container so `margin-top: auto` on `.pager` pins it to the bottom: add `display: flex; flex-direction: column` to the existing `.main` rule. Keep its `background` and `padding` exactly as shipped. This is the minimal frame change the pager needs; the `248px 1fr` grid and `.modal-layer` are untouched. [Source: pokermath/src/App.svelte:27-30,45-49]
   - [x] Leave the `$derived(sections[appState.currentSection])` selector and the title/subtitle placeholder exactly as-is — clicking Next/Back mutates `appState.currentSection`, the `$derived` recomputes, and the placeholder title/subtitle swaps. That swap is the visible proof of AC1. Do **not** replace the placeholder with real archetypes (Epic 2/3). [Source: pokermath/src/App.svelte:6,13-14]
+
+### Review Findings
+
+- [x] [Review][Defer] Pager `<button>` elements lack individual `aria-label` [Pager.svelte:19,23] — deferred, Story 1.6 a11y scope (same bucket as 1.4 SidebarNavItem ARIA item)
 
 - [x] **Task 4: Verify (AC: #1, #2, #3, #4)**
   - [x] `npm run check` → svelte-check + tsc report 0 errors / 0 warnings. [Source: 1-4-…md:226]
@@ -253,3 +257,4 @@ claude-sonnet-4-6
 
 - 2026-05-29: Story 1.5 created — ready-for-dev. Back/Next Pager (`Pager.svelte`) wired into `App.svelte` content area; store-aware derived bounds + clamped writers close the 1.3/1.4 deferred end-clamp findings.
 - 2026-05-29: Story 1.5 implemented — check/test/build green; all four ACs visually confirmed via Playwright. Status → review.
+- 2026-05-29: Code review complete — 0 patch, 1 defer (Pager button aria-labels → Story 1.6), 12 dismissed. Status → done.
