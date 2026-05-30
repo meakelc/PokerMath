@@ -17,12 +17,12 @@
 <nav class="pager" aria-label="Section pager">
   <div class="slot">
     {#if hasBack}
-      <button type="button" class="btn ghost" onclick={back}>← Back</button>
+      <button type="button" class="btn ghost" onclick={back}><span aria-hidden="true">←</span> Back</button>
     {/if}
   </div>
   <div class="slot end">
     {#if hasNext}
-      <button type="button" class="btn primary" onclick={next}>Next →</button>
+      <button type="button" class="btn primary" onclick={next}>Next <span aria-hidden="true">→</span></button>
     {/if}
   </div>
 </nav>

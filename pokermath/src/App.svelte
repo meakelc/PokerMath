@@ -11,8 +11,12 @@
   <Sidebar />
 
   <main class="main">
-    <h1 class="section-title">{active.title}</h1>
-    <p class="section-subtitle">{active.subtitle}</p>
+    {#key active.id}
+      <div class="section-head">
+        <h1 class="section-title">{active.title}</h1>
+        <p class="section-subtitle">{active.subtitle}</p>
+      </div>
+    {/key}
     <Pager />
   </main>
 </div>
@@ -31,6 +35,15 @@
     flex-direction: column;
     background: var(--color-felt);
     padding: var(--space-content-pad);
+  }
+
+  .section-head {
+    animation: section-fade var(--motion-fast) var(--motion-ease);
+  }
+
+  @keyframes section-fade {
+    from { opacity: 0; }
+    to   { opacity: 1; }
   }
 
   .section-title {

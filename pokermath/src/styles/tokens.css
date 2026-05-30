@@ -72,4 +72,13 @@
   --ratio-card: 2 / 3;
   --control-height: 40px;
   --padding-button-primary: 11px 22px;
+
+  /* Focus */
+  --color-focus: var(--color-gold);
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
+
+  /* Motion */
+  --motion-fast: 120ms;
+  --motion-ease: ease;
 }

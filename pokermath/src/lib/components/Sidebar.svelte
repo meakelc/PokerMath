@@ -23,6 +23,7 @@
 
 <style>
   .side {
+    --color-focus: var(--color-sidebar-text);
     background: var(--color-sidebar);
     display: flex;
     flex-direction: column;
