@@ -4,7 +4,7 @@ baseline_commit: f78c6d8
 
 # Story 2.1: Card notation & graphical card rendering
 
-Status: review
+Status: done
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
@@ -155,6 +155,13 @@ so that I can read rank and suit at a glance and count outs faster.
     - **No regression:** the shell still navigates (sidebar + pager) and reload returns to Introduction. ✅ [Source: 1-6-…md:141]
   - [x] Record exact command outputs + the visual-pass result in Dev Agent Record → Completion Notes.
 
+### Review Findings
+
+- [x] [Review][Defer] Duplicate card keys crash `CardGroup` keyed `{#each}` [CardGroup.svelte:11] — deferred, pre-existing
+- [x] [Review][Defer] RANKS/SUITS arrays duplicated in test file instead of imported from `cards.ts` [cards.test.ts:64-65] — deferred, pre-existing
+- [x] [Review][Defer] `cards` prop has no default — crash if omitted (svelte-check covers at build time; no consumers yet) [CardGroup.svelte:5] — deferred, pre-existing
+- [x] [Review][Defer] `width: 60px` + `aspect-ratio` has no overflow handling [PlayingCard.svelte:21-22] — deferred, pre-existing
+
 ## Dev Notes
 
 ### Scope boundary (read first)
@@ -291,3 +298,4 @@ None — implementation proceeded cleanly without halts.
 ## Change Log
 
 - 2026-05-29: Implemented Story 2.1 — added `cards.ts` canonical notation module, `cards.test.ts` (69 tests, full round-trip + malformed rejection coverage), `PlayingCard.svelte` four-color card primitive, `CardGroup.svelte` labeled group wrapper. All ACs satisfied. (claude-sonnet-4-6)
+- 2026-05-29: Code review complete — 0 patches, 4 deferred, 12 dismissed. Story marked done. (claude-sonnet-4-6)
