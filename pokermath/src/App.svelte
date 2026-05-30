@@ -1,14 +1,13 @@
 <script lang="ts">
   import { appState } from './lib/appState.svelte'
   import { sections } from './content/sections'
+  import Sidebar from './lib/components/Sidebar.svelte'
 
   const active = $derived(sections[appState.currentSection])
 </script>
 
 <div class="app">
-  <aside class="side">
-    <span class="wordmark">PokerMath</span>
-  </aside>
+  <Sidebar />
 
   <main class="main">
     <h1 class="section-title">{active.title}</h1>
@@ -23,19 +22,6 @@
     display: grid;
     grid-template-columns: 248px 1fr;
     height: 100vh;
-  }
-
-  .side {
-    background: var(--color-sidebar);
-    display: flex;
-    align-items: flex-start;
-    padding: var(--space-content-pad);
-  }
-
-  .wordmark {
-    font: var(--font-heading-sm);
-    color: var(--color-sidebar-text);
-    letter-spacing: var(--tracking-display-lg);
   }
 
   .main {
