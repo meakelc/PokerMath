@@ -68,4 +68,23 @@
     font: var(--font-body-lg);
     color: var(--color-text-on-felt);
   }
+
+  .prose :global(p) {
+    margin: 0;
+  }
+
+  .prose :global(p + p) {
+    margin-top: var(--space-4);
+  }
+
+  .prose :global(strong) {
+    font-weight: 600;
+    color: var(--color-text-on-felt);
+  }
+
+  /* Inline hand-notation token — mono, reads as "code"; four-color graphic handled by PlayingCard */
+  .prose :global(code.notation) {
+    font: var(--font-value);
+    color: var(--color-gold);
+  }
 </style>
