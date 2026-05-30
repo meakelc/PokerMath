@@ -1,5 +1,10 @@
 # Deferred Work
 
+## Deferred from: code review of 1-4-sidebar-section-index-free-navigation (2026-05-29)
+
+- Out-of-bounds `currentSection` produces `undefined` active — `App.svelte:6`, `Sidebar.svelte:17`; Story 1.5 pager will constrain all writes to valid indices (0–3); no speculative guard here per spec.
+- Accessible composite name / ARIA polish on nav `<button>` — `SidebarNavItem.svelte:17-27`; native button with visible text sufficient for now; full ARIA audit (aria-label, focus-ring, heading hierarchy) is Story 1.6 scope.
+
 ## Deferred from: code review of 1-3-two-pane-app-frame-in-memory-state-store (2026-05-29)
 
 - `active` is `undefined` when `currentSection` is out-of-range — no bounds check on `sections[appState.currentSection]` in `App.svelte:5`; fix belongs with Story 1.4/1.5 when nav controls are added.
