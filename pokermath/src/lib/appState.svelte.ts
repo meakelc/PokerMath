@@ -1,8 +1,28 @@
 import type { CheatSheetId } from '../content/cheatsheets'
+import type { HintRung, ValidationResult, Decision } from './assessment/types'
 
-// Single source of mutable runtime state (AR-5). Grows to hold per-LO
-// assessment state and the cheat-sheet modal target in Epic 2/3.
+// Single source of mutable runtime state (AR-5).
 export const appState = $state({
   currentSection: 0, // index into content/sections.ts; 0 = Introduction (cold start)
   openCheatSheet: null as CheatSheetId | null, // null = closed; a CheatSheetId = that sheet open
+  assessments: {
+    lo1: {
+      fields: { outs: '', streets: '', equity: '' },
+      result: null as ValidationResult | null,
+      hint: null as HintRung | null,
+      passed: false,
+    },
+    lo2: {
+      fields: { ratio: ['', ''] as [string, string], requiredEquity: '' },
+      result: null as ValidationResult | null,
+      hint: null as HintRung | null,
+      passed: false,
+    },
+    lo3: {
+      fields: { equity: '', ratio: ['', ''] as [string, string], requiredEquity: '', decision: '' as Decision | '' },
+      result: null as ValidationResult | null,
+      hint: null as HintRung | null,
+      passed: false,
+    },
+  },
 })
