@@ -9,6 +9,7 @@
   import NumericInput from '../lib/components/NumericInput.svelte'
   import RatioInput from '../lib/components/RatioInput.svelte'
   import CheckAnswerButton from '../lib/components/CheckAnswerButton.svelte'
+  import FeedbackRow from '../lib/components/FeedbackRow.svelte'
   import type { SectionId } from '../content/sections'
   import type { Scenario, AnswerKey } from '../lib/assessment/types'
 
@@ -42,6 +43,15 @@
     }
     return false
   })
+
+  const feedbackPassed = $derived.by(() => {
+    const result = appState.assessments[scenario.lo].result
+    return result === null ? null : result.passed
+  })
+
+  const feedbackHintText = $derived.by(
+    () => appState.assessments[scenario.lo].hint?.text ?? null
+  )
 
   function buildSubmitted(lo: 'lo1' | 'lo2' | 'lo3'): SubmittedAnswers {
     if (lo === 'lo1') {
@@ -185,7 +195,7 @@
           </div>
         {/if}
 
-        <!-- Feedback row slot — FeedbackRow rendered here in Story 3.5 -->
+        <FeedbackRow passed={feedbackPassed} hintText={feedbackHintText} />
 
         <CheckAnswerButton disabled={!canSubmit} />
       </form>

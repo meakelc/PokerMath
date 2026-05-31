@@ -1,8 +1,16 @@
 <script lang="ts">
   import { appState } from '../appState.svelte'
   import { sections } from '../../content/sections'
+  import type { Section } from '../../content/sections'
   import { cheatSheets } from '../../content/cheatsheets'
   import SidebarNavItem from './SidebarNavItem.svelte'
+
+  function getSectionComplete(section: Section): boolean {
+    if (section.id === 'equity')   return appState.assessments.lo1.passed
+    if (section.id === 'pot-odds') return appState.assessments.lo2.passed
+    if (section.id === 'calling')  return appState.assessments.lo3.passed
+    return false
+  }
 </script>
 
 <aside class="side">
@@ -16,6 +24,7 @@
         title={section.title}
         subtitle={section.subtitle}
         active={i === appState.currentSection}
+        complete={getSectionComplete(section)}
         onselect={() => (appState.currentSection = i)}
       />
     {/each}
