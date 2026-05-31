@@ -4,7 +4,7 @@ baseline_commit: 3145433
 
 # Story 3.3: Hint-selection engine with unit tests
 
-Status: review
+Status: done
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
@@ -251,6 +251,13 @@ The test file may import `content/scenarios.ts` + `content/hintLadders.ts` (test
 - [Source: pokermath/src/lib/assessment/validation.test.ts:1-4] — co-located Vitest style to mirror
 - [Source: _bmad-output/implementation-artifacts/3-2-validation-engine-with-unit-tests.md] — sibling-engine conventions, frozen-3.1 rule, `validate(answer,…)` divergence precedent, suite-total reporting, Review Findings → deferred-work handoff
 - [Source: _bmad-output/implementation-artifacts/deferred-work.md:10,12] — the two 3.1 guards this story closes (Partial-lookup undefined; rung clamp)
+
+### Review Findings
+
+- [x] [Review][Patch] `detectError` missing `default` return — returns `undefined` not `null` for unrecognized `scenario.lo`, violating the `ErrorType | null` contract [`hints.ts`, end of switch]
+- [x] [Review][Defer] `prev.rung` negative integer in `selectHint` yields `undefined` text — `Math.min(prev.rung + 1, rungs.length - 1)` can produce a negative index; pre-existing, 3.4/3.5 store will be sole producer of valid rungs [`hints.ts:65`] — deferred, pre-existing
+- [x] [Review][Defer] Non-null assertions `answer.equity!`/`answer.ratio!` silent on wrong-LO data — pre-existing type design from frozen `types.ts` (3.1); `!` assertions sound for all authored callers [`hints.ts:19,33,38,42`] — deferred, pre-existing
+- [x] [Review][Defer] `parseNum` hex/scientific coercion (`'0x9'`→9, `'1e2'`→100) inherited from `validation.ts` (3.2); pre-existing behavior, fixing requires touching frozen 3.2 code [`validation.ts:17`] — deferred, pre-existing
 
 ## Dev Agent Record
 

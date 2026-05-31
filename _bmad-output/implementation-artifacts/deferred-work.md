@@ -1,5 +1,12 @@
 # Deferred Work
 
+## Deferred from: code review of 3-3-hint-selection-engine-with-unit-tests (2026-05-31)
+
+- `detectError` missing `default: return null` — switch has no default case; unrecognized `scenario.lo` returns `undefined` (not `null`), violating the `ErrorType | null` contract; `selectHint` is accidentally safe via `== null`, but strict callers would break. Fix: add `default: return null` after the switch. [`hints.ts`, end of switch] — **patch item left as action in story file**
+- `prev.rung` negative integer yields `undefined` text in `selectHint` — `Math.min(prev.rung + 1, rungs.length - 1)` with a negative `prev.rung` produces a negative index; `rungs[negative]` = `undefined`, silently violating `HintRung.text: string`. Pre-existing; 3.4/3.5 store will be the sole producer of `prev` values and always yields non-negative rungs. Add a `Math.max(0, ...)` clamp when implementing the store in 3.4. [`hints.ts:65`]
+- Non-null assertions `answer.equity!`/`answer.ratio!` silent on wrong-LO data — `AnswerKey` fields are all optional in `types.ts` (frozen 3.1); `!` assertions are sound for all authored callers but fail silently (NaN) or throw if called with a mismatched scenario/answer pair. Address if `types.ts` is ever unfrozen or if LO-typed answer keys are introduced. [`hints.ts:19,33,38,42`]
+- `parseNum` hex/scientific coercion (`'0x9'`→9, `'1e2'`→100, `'Infinity'`→Infinity) — pre-existing `Number()` behavior in `parseNum` from frozen 3.2 `validation.ts`; now also affects hint detection. A learner typing `'0x9'` for outs would be classified as correct. Fix requires modifying `parseNum` in `validation.ts` (e.g., rejecting non-decimal strings). [`validation.ts:17`]
+
 ## Deferred from: code review of 3-2-validation-engine-with-unit-tests (2026-05-30)
 
 - `answer.requiredEquity` is never read by `validate()` — the `requiredEquity` check always uses the hardcoded `REQUIRED_EQUITY_BAND [16,17]` and ignores whatever `answer.requiredEquity` holds. Intentional for current LO2/LO3 scenarios (answer=16.7, within band). If a future scenario changes the `requiredEquity` answer away from ~16.7, `REQUIRED_EQUITY_BAND` must be updated in tandem — the two values are silently coupled. [`validation.ts:44`]

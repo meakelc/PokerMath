@@ -50,6 +50,8 @@ export function detectError(
       if (equityCorrect && ratioCorrect && reqCorrect && decisionCorrect) return null
       return 'wrong-comparison-direction'
     }
+    default:
+      return null
   }
 }
 
