@@ -1,5 +1,9 @@
 # Deferred Work
 
+## Deferred from: code review of 3-2-validation-engine-with-unit-tests (2026-05-30)
+
+- `answer.requiredEquity` is never read by `validate()` — the `requiredEquity` check always uses the hardcoded `REQUIRED_EQUITY_BAND [16,17]` and ignores whatever `answer.requiredEquity` holds. Intentional for current LO2/LO3 scenarios (answer=16.7, within band). If a future scenario changes the `requiredEquity` answer away from ~16.7, `REQUIRED_EQUITY_BAND` must be updated in tandem — the two values are silently coupled. [`validation.ts:44`]
+
 ## Deferred from: code review of 3-1-assessment-data-contracts-scenarios-hint-ladders (2026-05-30)
 
 - `AnswerKey` fully optional — all six fields are `?`; downstream 3.2–3.8 must null-guard every field access before use.

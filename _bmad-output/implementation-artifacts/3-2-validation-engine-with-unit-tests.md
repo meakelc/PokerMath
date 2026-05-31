@@ -4,7 +4,7 @@ baseline_commit: 45098b4
 
 # Story 3.2: Validation engine with unit tests
 
-Status: review
+Status: done
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
@@ -249,6 +249,10 @@ None — clean implementation, no debugging required.
 
 - `pokermath/src/lib/assessment/validation.ts` — NEW
 - `pokermath/src/lib/assessment/validation.test.ts` — NEW
+
+### Review Findings
+
+- [x] [Review][Defer] `answer.requiredEquity` is never read by `validate()` — band always uses hardcoded `REQUIRED_EQUITY_BAND [16,17]` [`validation.ts:44`] — deferred, intentional design per spec Dev Notes; `answer.requiredEquity` stores canonical display value (used by 3.3 `detectError()`), not the validation boundary. If a future scenario changes `requiredEquity` away from ~16.7, `REQUIRED_EQUITY_BAND` must be updated in tandem.
 
 ## Change Log
 
