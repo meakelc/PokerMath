@@ -1,5 +1,17 @@
 # Deferred Work
 
+## Deferred from: code review of 2-7-cheat-sheet-panel-modal-mechanism (2026-05-30)
+
+- Hardcoded `id="cs-title"` would conflict if two `CheatSheetModal` instances are ever mounted simultaneously — `lib/components/CheatSheetModal.svelte:35`; single-modal architecture guarantees one instance today; revisit if stacked modals are ever introduced.
+- `modal-layer pointer-events: none` + scrim `pointer-events: auto` coupling is fragile for future non-modal layer children — `App.svelte:89`; pre-existing documented caveat; any future layer child that omits `pointer-events: auto` will silently receive no mouse events.
+- Escape keydown in `CheatSheetModal` does not call `e.stopPropagation()` — `lib/components/CheatSheetModal.svelte:21`; no competing Escape listener exists today; add if future keyboard handlers stack on `svelte:window`.
+- Drag-release on scrim closes modal (mouseup after text-select ending on scrim passes the `e.target === e.currentTarget` guard) — `lib/components/CheatSheetModal.svelte:25`; minor UX edge case, not required by spec.
+- `navlabel <span>` "Cheat Sheets" has no semantic group association for assistive technology — `lib/components/Sidebar.svelte:25`; pre-existing house pattern (the "Sections" navlabel uses the same `<span>` shape); address in a future a11y pass.
+- Sheet buttons missing `aria-haspopup="dialog"` — `lib/components/Sidebar.svelte:27-31`; enhancement beyond NFR-2 scope for 2.7; add when doing a full ARIA pass.
+- ~~`cs-placeholder` style scoped to `App.svelte` is invisibly coupled to the snippet location~~ — **RESOLVED in Story 2.8**: placeholder `<p>` and `.cs-placeholder` style both removed from `App.svelte`.
+- ~~Scroll position not reset when user switches sheets without closing~~ — **RESOLVED in Story 2.8**: `{#key openSheet.id}` added to `App.svelte` modal block; forces full remount on sheet switch, resetting `.body` `scrollTop` to 0.
+- Invalid `openCheatSheet` value silently fails to open modal — `lib/appState.svelte.ts:7`; TypeScript-guarded at compile time; direct mutation is the only runtime write path; add a runtime guard only if a serialized/restored state mechanism is introduced.
+
 ## Deferred from: code review of 2-2-informational-screen-archetype (2026-05-30)
 
 - `parseCard` called at module-eval time in `IntroContent.svelte` with no error boundary — `content/sections/IntroContent.svelte:11`; current hardcoded literals (`Ah`, `Tc`) are valid; a typo on any future card literal throws synchronously during component instantiation and tears down the component tree with a blank screen.
