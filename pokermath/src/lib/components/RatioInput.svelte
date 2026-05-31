@@ -7,20 +7,22 @@
 
   function handleAntecedent(e: Event) {
     const el = e.target as HTMLInputElement
-    const cleaned = el.value.replace(/[^0-9.]/g, '')
+    const stripped = el.value.replace(/[^0-9.]/g, '')
+    const cleaned = stripped.replace(/^(\d*\.?\d*).*$/, '$1')
     if (cleaned !== el.value) el.value = cleaned
     antecedent = cleaned
   }
 
   function handleConsequent(e: Event) {
     const el = e.target as HTMLInputElement
-    const cleaned = el.value.replace(/[^0-9.]/g, '')
+    const stripped = el.value.replace(/[^0-9.]/g, '')
+    const cleaned = stripped.replace(/^(\d*\.?\d*).*$/, '$1')
     if (cleaned !== el.value) el.value = cleaned
     consequent = cleaned
   }
 </script>
 
-<div class="ratio" aria-label={label}>
+<div class="ratio" role="group" aria-label={label}>
   <div class="well" class:filled={antecedent !== ''}>
     <input
       type="text"

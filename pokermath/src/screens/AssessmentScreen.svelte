@@ -4,7 +4,6 @@
   import type { SubmittedAnswers } from '../lib/assessment/validation'
   import { selectHint } from '../lib/assessment/hints'
   import { hintLadders } from '../content/hintLadders'
-  import { assessments } from '../content/scenarios'
   import CardGroup from '../lib/components/CardGroup.svelte'
   import Pager from '../lib/components/Pager.svelte'
   import NumericInput from '../lib/components/NumericInput.svelte'

@@ -28,13 +28,15 @@
   <main class="main">
     {#if active.kind === 'assessment'}
       {@const asmEntry = assessmentScenarios[active.id as AssessmentSectionId]}
-      <AssessmentScreen
-        sectionId={active.id}
-        title={active.title}
-        subtitle={active.subtitle}
-        scenario={asmEntry.scenario}
-        answer={asmEntry.answer}
-      />
+      {#if asmEntry}
+        <AssessmentScreen
+          sectionId={active.id}
+          title={active.title}
+          subtitle={active.subtitle}
+          scenario={asmEntry.scenario}
+          answer={asmEntry.answer}
+        />
+      {/if}
     {:else if sectionContent[active.id]}
       <InformationalScreen
         sectionId={active.id}

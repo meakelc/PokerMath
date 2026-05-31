@@ -8,7 +8,8 @@
 
   function handleInput(e: Event) {
     const el = e.target as HTMLInputElement
-    const cleaned = el.value.replace(/[^0-9.]/g, '')
+    const stripped = el.value.replace(/[^0-9.]/g, '')
+    const cleaned = stripped.replace(/^(\d*\.?\d*).*$/, '$1')
     if (cleaned !== el.value) el.value = cleaned
     value = cleaned
   }

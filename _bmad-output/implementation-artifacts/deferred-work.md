@@ -1,5 +1,15 @@
 # Deferred Work
 
+## Deferred from: code review of 3-4-assessment-screen-archetype-input-primitives (2026-05-31)
+
+- No `{:else}` fallback for sections with neither assessment nor informational content — temp placeholder removed intentionally per story spec; a new unregistered section renders blank; add a dev-time warning or fallback when needed. [`App.svelte:main branch`]
+- LO3 always fails validation (`decision` omitted from `buildSubmitted`) — intentional intermediate behavior; every LO3 submit returns `passed: false` and fires a "wrong-comparison-direction" hint even for correct numeric answers until Story 3.8 wires `CallFoldToggle`. [`AssessmentScreen.svelte:buildSubmitted`]
+- `prev.rung` clamp heals in-flight copy but not persisted state — `handleSubmit` spreads `{ ...rawPrev, rung: Math.max(0, rawPrev.rung) }` but `appState.assessments[lo].hint.rung` stays negative if ever written so; on re-submit `selectHint` receives a clamped `prev.rung = 0` and returns rung 1, permanently skipping rung 0. [`AssessmentScreen.svelte:handleSubmit`]
+- Rung clamp has no upper-bound cap — `prev.rung` is clamped at 0 (lower) only; a stored `hint.rung` exceeding the ladder's last index passes unchecked to `selectHint`. [`AssessmentScreen.svelte:handleSubmit`]
+- Assessment state (fields/result/hint/passed) never reset on navigation — intentional persistent design per AR-5; stale `passed: true` visible if returning to a section after scenario data changes; add a reset-on-navigate hook if desired. [`appState.svelte.ts`]
+- CardGroup renders an empty labeled container when `scenario.board` is empty but `scenario.hand` is non-empty — `{#if scenario.hand.length > 0}` guard enters the card-region block and renders `<CardGroup cards={[]} label="Board" />`; no current scenario has this shape; add a per-CardGroup guard if a future scenario does. [`AssessmentScreen.svelte:card-region`]
+- Both `<label for>` and `aria-label` on the same NumericInput — AT uses `aria-label` (overrides `<label>`), so screen readers announce "Number of outs" while the visible label reads "Outs"; both intentionally specified by the story; address in a future ARIA pass by unifying texts or removing `aria-label` when a visual label is present. [`AssessmentScreen.svelte:field rows`]
+
 ## Deferred from: code review of 3-3-hint-selection-engine-with-unit-tests (2026-05-31)
 
 - `detectError` missing `default: return null` — switch has no default case; unrecognized `scenario.lo` returns `undefined` (not `null`), violating the `ErrorType | null` contract; `selectHint` is accidentally safe via `== null`, but strict callers would break. Fix: add `default: return null` after the switch. [`hints.ts`, end of switch] — **patch item left as action in story file**

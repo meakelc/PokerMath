@@ -4,7 +4,7 @@ baseline_commit: b8d7af3
 
 # Story 3.4: Assessment screen archetype & input primitives
 
-Status: review
+Status: done
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
@@ -621,3 +621,17 @@ A11y fix: Pot odds `<label>` elements (LO2/LO3) changed to `<span class="field-l
 ## Change Log
 
 - 2026-05-31: feat(3.4) — assessment screen archetype + input primitives. Created NumericInput, RatioInput, CheckAnswerButton, AssessmentScreen. Expanded appState with per-LO assessment state. Updated App.svelte routing to render AssessmentScreen for assessment-kind sections. Addressed deferred-work items from 3.1/3.3 reviews.
+
+### Review Findings
+
+- [x] [Review][Patch] Multiple decimal points pass numeric filter → NaN in validate() — regex `/[^0-9.]/g` allows multiple dots; `"1.2.3"` reaches validate() as NaN [NumericInput.svelte:handleInput, RatioInput.svelte:handleAntecedent/handleConsequent]
+- [x] [Review][Patch] Dead import `assessments` unused in AssessmentScreen — imported on line 7 but never referenced in script or template [AssessmentScreen.svelte:7]
+- [x] [Review][Patch] `aria-label` on RatioInput wrapper `<div>` has no ARIA role — `aria-label` on a generic div is ignored by AT; group label "Pot odds ratio" is lost; add `role="group"` [RatioInput.svelte:wrapper div]
+- [x] [Review][Patch] No runtime guard before `assessmentScenarios[active.id]` — `active.id as AssessmentSectionId` cast bypasses TypeScript; a future `kind: 'assessment'` section with an unregistered id silently returns `undefined` and throws on `asmEntry.scenario` [App.svelte:assessment routing block]
+- [x] [Review][Defer] No `{:else}` fallback for unregistered sections — intentional per spec; temp placeholder removed; new unregistered section renders blank [App.svelte:main branch] — deferred, pre-existing
+- [x] [Review][Defer] LO3 always fails validation (decision omitted from buildSubmitted) → wrong-hint loop until Story 3.8 — intentional intermediate behavior per story scope [AssessmentScreen.svelte:buildSubmitted] — deferred, pre-existing
+- [x] [Review][Defer] Rung clamp heals in-flight copy but not persisted appState.hint.rung — if stored rung is ever negative, re-submits skip rung 0 [AssessmentScreen.svelte:handleSubmit] — deferred, pre-existing
+- [x] [Review][Defer] Rung clamp has no upper-bound cap — stored hint.rung exceeding ladder length passes unchecked to selectHint [AssessmentScreen.svelte:handleSubmit] — deferred, pre-existing
+- [x] [Review][Defer] Assessment fields/result/hint/passed never reset on navigation — intentional persistent state design per AR-5 [appState.svelte.ts] — deferred, pre-existing
+- [x] [Review][Defer] CardGroup renders empty Board label when board is empty but hand is non-empty — no current scenario has this shape; hypothetical future risk [AssessmentScreen.svelte:card-region] — deferred, pre-existing
+- [x] [Review][Defer] Both `<label for>` and `aria-label` on same NumericInput — AT announces aria-label text (e.g. "Number of outs") while visible label says "Outs"; both specified by story [AssessmentScreen.svelte:field rows] — deferred, pre-existing
