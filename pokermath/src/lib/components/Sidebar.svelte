@@ -73,6 +73,10 @@
     flex-direction: column;
   }
 
+  .sheets .navlabel {
+    margin-top: 0;
+  }
+
   .sheet {
     display: flex;
     align-items: center;

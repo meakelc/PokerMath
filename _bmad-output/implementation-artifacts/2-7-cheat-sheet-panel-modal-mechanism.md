@@ -4,7 +4,7 @@ baseline_commit: 1a79794
 
 # Story 2.7: Cheat-sheet panel & modal mechanism
 
-Status: review
+Status: done
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
@@ -141,6 +141,21 @@ so that I can refresh a prerequisite mid-task.
     - **Pointer-events sanity:** confirm the close button, scrim-click, and (later) body are all clickable — proving the `.scrim` set `pointer-events: auto` against the `pointer-events: none` layer.
     - **No regression:** all four Sections still render and navigate (sidebar + Back/Next); reload returns to Introduction with state cleared and `openCheatSheet` back to `null` (FR-3, UX-DR21); quiet section fade intact.
   - [x] Record exact command outputs + visual-pass result in Dev Agent Record → Completion Notes.
+
+### Review Findings
+
+- [x] [Review][Patch] `as const` defeated by explicit `readonly CheatSheet[]` annotation — literal narrowing is a no-op; use `as const satisfies readonly CheatSheet[]` [content/cheatsheets.ts:5]
+- [x] [Review][Patch] `kbd` padding hardcodes `4px` where `--space-1` (= 4px) exists — AR-2 token violation [lib/components/CheatSheetModal.svelte:127]
+- [x] [Review][Patch] `.navlabel` `margin-top: var(--space-8)` (32px) inside `.sheets` creates a 44px gap between border divider and "Cheat Sheets" label [lib/components/Sidebar.svelte:59]
+- [x] [Review][Defer] Hardcoded `id="cs-title"` would break if two modals mounted simultaneously [lib/components/CheatSheetModal.svelte:35] — deferred, single-modal arch guarantees one instance; revisit if stacked modals introduced
+- [x] [Review][Defer] `modal-layer pointer-events: none` fragile for future non-modal children [src/App.svelte:89] — deferred, pre-existing; documented in deferred-work.md
+- [x] [Review][Defer] Escape keydown not calling `e.stopPropagation()` [lib/components/CheatSheetModal.svelte:21] — deferred, no competing Escape listener today; add if future keyboard handlers stack
+- [x] [Review][Defer] Drag-release on scrim closes modal (mouseup after text-select ending on scrim) [lib/components/CheatSheetModal.svelte:25] — deferred, minor UX edge case, not required by spec
+- [x] [Review][Defer] `navlabel <span>` "Cheat Sheets" has no semantic group association for AT [lib/components/Sidebar.svelte:25] — deferred, pre-existing house pattern ("Sections" uses same shape)
+- [x] [Review][Defer] Sheet buttons missing `aria-haspopup="dialog"` [lib/components/Sidebar.svelte:27-31] — deferred, enhancement beyond NFR-2 scope for 2.7
+- [x] [Review][Defer] `cs-placeholder` style scoped to `App.svelte` is invisible coupling if moved to a child [src/App.svelte:92-100] — deferred, placeholder replaced entirely in Story 2.8
+- [x] [Review][Defer] Scroll position not reset when switching sheets without closing [lib/components/CheatSheetModal.svelte] — deferred, placeholder body cannot scroll; address in 2.8 when content is scrollable
+- [x] [Review][Defer] Invalid `openCheatSheet` value silently fails to open modal [lib/appState.svelte.ts:7] — deferred, TypeScript-guarded; direct mutation is the only write path
 
 ## Dev Notes
 

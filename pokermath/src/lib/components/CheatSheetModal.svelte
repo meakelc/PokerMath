@@ -124,6 +124,6 @@
     background: var(--color-sidebar);
     border: 1px solid var(--color-sidebar-border);
     border-radius: var(--radius-sm);
-    padding: 1px 4px;
+    padding: 1px var(--space-1);
   }
 </style>
