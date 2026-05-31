@@ -1,5 +1,11 @@
 # Deferred Work
 
+## Deferred from: code review of 3-5-hint-success-feedback-rows (2026-05-31)
+
+- `getSectionComplete` silently returns `false` for unrecognized `section.id` — hard-coded IDs only ('equity', 'pot-odds', 'calling'); a new section added to `sections.ts` without updating this function permanently shows as incomplete with no type error or warning. [`Sidebar.svelte:8-13`]
+- `passed` flag never resets to `false` once set `true` — intentional per AR-5 persistent design; stale sidebar ✓ persists if assessment state is ever reset by a future story; add a reset path in that story. [`appState.svelte.ts`]
+- `SidebarNavItem` CSS `::after` ✓ has no accessible label — pre-existing from Story 1.4; `.item.done .t::after { content: ' ✓'; }` is pure CSS generated content, not announced by screen readers; no `aria-label` or visually-hidden text on the nav button communicates section-complete state to AT users. [`SidebarNavItem.svelte:77-80`]
+
 ## Deferred from: code review of 3-4-assessment-screen-archetype-input-primitives (2026-05-31)
 
 - No `{:else}` fallback for sections with neither assessment nor informational content — temp placeholder removed intentionally per story spec; a new unregistered section renders blank; add a dev-time warning or fallback when needed. [`App.svelte:main branch`]

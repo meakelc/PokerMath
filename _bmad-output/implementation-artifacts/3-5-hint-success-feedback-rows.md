@@ -4,7 +4,7 @@ baseline_commit: 5f7fb5e
 
 # Story 3.5: Hint & success feedback rows
 
-Status: review
+Status: done
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
@@ -324,6 +324,15 @@ From `deferred-work.md`:
 - Validations: `npm run check` 0 errors/warnings; `npm run test -- --run` 170/170 pass; `npm run build` clean. Manual smoke: LO1 wrong → amber hint (no field coloring), LO1 correct → success + sidebar ✓ + no auto-advance, LO3 wrong → amber hint (expected deferred behavior).
 - `_verify/3-5/` screenshots captured via Playwright.
 
+## Review Findings
+
+- [x] [Review][Patch] Empty hint row when `hintText` is null but `passed === false` — `feedbackHintText` can be `null` if `selectHint` returns nothing; `FeedbackRow` renders the amber row with the `!` glyph but an empty `<p>`, showing a broken hint box with no message [`FeedbackRow.svelte:16`, `AssessmentScreen.svelte:52-54`]
+- [x] [Review][Patch] No `@media (prefers-reduced-motion)` guard in `FeedbackRow` — global CSS sets `animation-duration: 0.01ms` but leaves `animation-fill-mode: backwards` active, holding the element at `opacity: 0` for one paint frame for reduced-motion users; fix: add `@media (prefers-reduced-motion: reduce) { .row { animation: none; } }` in the scoped style block [`FeedbackRow.svelte:29-36`]
+- [x] [Review][Defer] `getSectionComplete` silently returns `false` for unrecognized `section.id` [`Sidebar.svelte:8-13`] — deferred, pre-existing
+- [x] [Review][Defer] `passed` flag never resets to `false` once set `true` — by design per AR-5; add reset path in any future story that clears assessment state [`appState.svelte.ts`] — deferred, pre-existing
+- [x] [Review][Defer] `SidebarNavItem` CSS `::after` ✓ has no accessible label — pre-existing from Story 1.4; `.item.done .t::after` CSS content not announced by screen readers [`SidebarNavItem.svelte:77-80`] — deferred, pre-existing
+
 ## Change Log
 
 - 2026-05-31: Story 3.5 implemented — created `FeedbackRow.svelte`; wired into `AssessmentScreen.svelte`; wired sidebar `complete` in `Sidebar.svelte`. All ACs satisfied. Status → review.
+- 2026-05-31: Code review complete — 2 patches, 3 deferred, 10 dismissed. Status → in-progress.

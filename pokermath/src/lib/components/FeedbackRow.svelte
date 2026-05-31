@@ -13,7 +13,7 @@
 {#if passed === false}
   <div class="row hint" role="alert">
     <span class="glyph" aria-hidden="true">!</span>
-    <p class="message">{hintText}</p>
+    <p class="message">{hintText ?? 'Check your answer and try again.'}</p>
   </div>
 {:else if passed === true}
   <div class="row success" role="alert">
@@ -61,5 +61,9 @@
   @keyframes feedback-fade {
     from { opacity: 0; transform: translateY(-4px); }
     to   { opacity: 1; transform: translateY(0);    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .row { animation: none; }
   }
 </style>
