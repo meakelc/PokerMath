@@ -35,6 +35,7 @@
           subtitle={active.subtitle}
           scenario={asmEntry.scenario}
           answer={asmEntry.answer}
+          content={sectionContent[active.id]}
         />
       {/if}
     {:else if sectionContent[active.id]}

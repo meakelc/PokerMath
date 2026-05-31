@@ -10,6 +10,7 @@
   import RatioInput from '../lib/components/RatioInput.svelte'
   import CheckAnswerButton from '../lib/components/CheckAnswerButton.svelte'
   import FeedbackRow from '../lib/components/FeedbackRow.svelte'
+  import type { Component } from 'svelte'
   import type { SectionId } from '../content/sections'
   import type { Scenario, AnswerKey } from '../lib/assessment/types'
 
@@ -19,12 +20,14 @@
     subtitle,
     scenario,
     answer,
+    content: Content = undefined,
   }: {
     sectionId: SectionId
     title: string
     subtitle: string
     scenario: Scenario
     answer: AnswerKey
+    content?: Component
   } = $props()
 
   const canSubmit = $derived.by(() => {
@@ -98,6 +101,12 @@
         <span class="kicker">Assessment</span>
         <h1 class="section-title">{title}</h1>
       </header>
+
+      {#if Content}
+        <div class="prose">
+          <Content />
+        </div>
+      {/if}
 
       <!-- Card region — hidden when hand is empty (LO2 has no hand/board) — deferred-work.md:23 -->
       {#if scenario.hand.length > 0}
@@ -284,4 +293,17 @@
     color: var(--color-text-on-felt-dim);
     min-width: 160px; /* justified literal — no token for label column width */
   }
+
+  .prose {
+    max-width: 60ch;
+    font: var(--font-body-lg);
+    color: var(--color-text-on-felt);
+  }
+
+  .prose :global(p) { margin: 0; }
+  .prose :global(p + p) { margin-top: var(--space-4); }
+  .prose :global(p + .group) { margin-top: var(--space-4); }
+  .prose :global(.group + p) { margin-top: var(--space-4); }
+  .prose :global(strong) { font-weight: 600; color: var(--color-text-on-felt); }
+  .prose :global(code.notation) { font: var(--font-value); color: var(--color-gold); }
 </style>
