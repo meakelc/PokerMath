@@ -1,5 +1,17 @@
 # Deferred Work
 
+## Deferred from: code review of 3-1-assessment-data-contracts-scenarios-hint-ladders (2026-05-30)
+
+- `AnswerKey` fully optional — all six fields are `?`; downstream 3.2–3.8 must null-guard every field access before use.
+- `HintLadder` is `Partial<Record<ErrorType, ...>>` — 3.3 hint engine must guard against `undefined` when an error type is not defined for a given LO.
+- `ValidationResult.hint` optional — 3.6–3.8 must null-guard before accessing `hint.text`/`hint.rung`; a discriminated union would enforce this at compile time.
+- `HintRung.rung` no bounds enforcement — 3.3 must clamp rung index to ladder array length before indexing.
+- `Ratio` admits zero, negative, NaN — 3.2 must validate ratio inputs at input boundaries.
+- `requiredEquity: 16.7` stored as float literal — 3.2 needs band comparison, not exact equality; no `REQUIRED_EQUITY_TOLERANCE_BAND` constant defined (contrast with `EQUITY_TOLERANCE_PP`).
+- `Scenario.id` typed as plain `string` with no uniqueness constraint — 3.6–3.8 should not use `id` as a lookup key without verifying uniqueness.
+- LO2 `hand: [], board: []` — 3.4/3.6 card-rendering screens must conditionally hide `CardGroup` when `hand.length === 0` to avoid orphan labels.
+- `ratio-percentage-confusion` rung 2 wording "what is already in the pot" is ambiguous between pre-bet ($40) and post-bet ($50) pot — minor content clarity improvement.
+
 ## Deferred from: code review of 2-7-cheat-sheet-panel-modal-mechanism (2026-05-30)
 
 - Hardcoded `id="cs-title"` would conflict if two `CheatSheetModal` instances are ever mounted simultaneously — `lib/components/CheatSheetModal.svelte:35`; single-modal architecture guarantees one instance today; revisit if stacked modals are ever introduced.
