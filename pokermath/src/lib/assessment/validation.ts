@@ -14,7 +14,7 @@ export type SubmittedAnswers = {
 /** Accept window (percent) for the cost/(pot+cost) required-equity field — covers 10/60 ≈ 16.7 and learner rounding to 16 or 17 (FR-11). */
 export const REQUIRED_EQUITY_BAND: readonly [number, number] = [16, 17]
 
-function parseNum(s: string | undefined): number {
+export function parseNum(s: string | undefined): number {
   if (s == null || s.trim() === '') return NaN
   return Number(s)
 }
