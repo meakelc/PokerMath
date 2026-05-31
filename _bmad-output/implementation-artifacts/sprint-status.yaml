@@ -35,7 +35,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 
 generated: 2026-05-29
-last_updated: 2026-05-30  # Story 3.1 → done
+last_updated: 2026-05-30  # Story 3.2 → review
 project: PokerMath
 project_key: NOKEY
 tracking_system: file-system
@@ -67,7 +67,7 @@ development_status:
   # Epic 3: Practice & Prove Mastery
   epic-3: in-progress
   3-1-assessment-data-contracts-scenarios-hint-ladders: done
-  3-2-validation-engine-with-unit-tests: backlog
+  3-2-validation-engine-with-unit-tests: review
   3-3-hint-selection-engine-with-unit-tests: backlog
   3-4-assessment-screen-archetype-input-primitives: backlog
   3-5-hint-success-feedback-rows: backlog
