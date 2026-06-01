@@ -1,5 +1,12 @@
 # Deferred Work
 
+## Deferred from: code review of 3-6-lo1-equity-assessment (2026-05-31)
+
+- `sectionContent[active.id]` silently passes `undefined` for future unknown assessment sections — `Partial<Record<SectionId, Component>>` has no type enforcement that all assessment SectionIds have entries; a new section added without a corresponding sectionContent entry silently renders no prose with no error. [`App.svelte`]
+- `{#if Content}` truthiness guard insufficient against truthy non-component values — a non-function truthy value in sectionContent bypasses the guard and causes a runtime mount error; TypeScript's `Component` type covers this at compile time for all current consumers. [`AssessmentScreen.svelte`]
+- `.prose` CSS block duplicated verbatim from `InformationalScreen.svelte` — intentional per story spec (copy-not-share is the correct Svelte pattern for scoped styles with `:global()` selectors); future prose typography changes must be applied in both screens. [`AssessmentScreen.svelte`]
+- `max-width: 60ch` on `.prose` is a no-op when the parent `.main` column is narrower than 60ch — pre-existing behavior shared with `InformationalScreen`; no overflow handling declared on `.body` or `.screen`. [`AssessmentScreen.svelte`]
+
 ## Deferred from: code review of 3-5-hint-success-feedback-rows (2026-05-31)
 
 - `getSectionComplete` silently returns `false` for unrecognized `section.id` — hard-coded IDs only ('equity', 'pot-odds', 'calling'); a new section added to `sections.ts` without updating this function permanently shows as incomplete with no type error or warning. [`Sidebar.svelte:8-13`]

@@ -4,7 +4,7 @@ baseline_commit: 80f619b
 
 # Story 3.6: LO1 equity assessment
 
-Status: review
+Status: done
 
 ## Story
 
@@ -259,3 +259,11 @@ Scenario data (`scenarios.ts`) and hint ladders (`hintLadders.ts`) verified exac
 ## Change Log
 
 - 2026-05-31: Story 3.6 implemented — added `content?: Component` prop to `AssessmentScreen.svelte`; wired `sectionContent[active.id]` in `App.svelte`; fulfils the Epic 3 content-wiring deferral for LO1 (and implicitly LO2/LO3 via same prop)
+- 2026-05-31: Code review complete — 0 patches, 4 deferred, 4 dismissed; story marked done
+
+### Review Findings
+
+- [x] [Review][Defer] `sectionContent[active.id]` silently passes `undefined` for future unknown assessment sections [`App.svelte`] — deferred, pre-existing
+- [x] [Review][Defer] `{#if Content}` truthiness guard insufficient against truthy non-component values [`AssessmentScreen.svelte`] — deferred, pre-existing
+- [x] [Review][Defer] `.prose` CSS block duplicated verbatim from `InformationalScreen.svelte` — intentional design decision per story spec [`AssessmentScreen.svelte`] — deferred, pre-existing
+- [x] [Review][Defer] `max-width: 60ch` is a no-op when parent column narrower than 60ch on small viewports [`AssessmentScreen.svelte`] — deferred, pre-existing
