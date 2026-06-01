@@ -4,7 +4,7 @@ baseline_commit: 6f4ed35
 
 # Story 3.7: LO2 pot odds assessment
 
-Status: review
+Status: done
 
 ## Story
 
@@ -66,6 +66,19 @@ so that I can express the break-even threshold both ways.
     - **Cheat sheet round-trip:** With ratio fields filled, open any cheat sheet → modal opens, Esc closes → ratio fields preserved (FR-6) ✓ VERIFIED
     - **Reload behavior:** Page reload returns to Introduction with LO2 fields cleared and ✓ absent (FR-3) ✓ VERIFIED
     - **Keyboard:** Tab through ratio antecedent → ratio consequent → requiredEquity → Check Answer; Enter submits when enabled (UX-DR20) ✓
+
+### Review Findings
+
+- [x] [Review][Patch] Smoke test never asserts — all ✅/❌ checks use `console.log` only; script always exits 0 regardless of outcome [_verify/smoke-3-7.mjs] — fixed: `check()` helper + `process.exit(1)` on failure
+- [x] [Review][Patch] Cheat sheet round-trip verifies only antecedent; consequent never read back; test can silently skip entire cheat-sheet section if selector fails [_verify/smoke-3-7.mjs:186,191,201] — fixed: consequent read back; skip counts as failure
+- [x] [Review][Defer] `testEquity` never tests (wrong ratio + correct equity) → FAIL; ratio field's contribution to `passed` is not isolated [_verify/smoke-3-7.mjs:168] — deferred, pre-existing
+- [x] [Review][Defer] `testEquity(15,false)` exercises the fallback error path in `hints.ts:36`, not the detection-window path at `hints.ts:34`; smoke test cannot distinguish the two code paths [_verify/smoke-3-7.mjs:149] — deferred, pre-existing
+- [x] [Review][Defer] Rung-escalation second `submit()` — `waitForSelector` may resolve on stale rung-0 alert before rung-1 renders; no text-change assertion [_verify/smoke-3-7.mjs:129] — deferred, pre-existing
+- [x] [Review][Defer] Reload test does not read back input field values to confirm they are empty post-reload [_verify/smoke-3-7.mjs:214] — deferred, pre-existing
+- [x] [Review][Defer] Floating-point band boundary not tested (e.g., 16.1, 16.5, 16.99); only integer endpoints exercised [_verify/smoke-3-7.mjs:178] — deferred, pre-existing
+- [x] [Review][Defer] Rung-1 text check uses partial-string OR that is disjoint from rung-0 by coincidence — fragile but accidentally correct [_verify/smoke-3-7.mjs:130] — deferred, pre-existing
+- [x] [Review][Defer] `getFeedbackText()` targets `[role="alert"] .message` child; silently returns `''` if no `.message` wrapper present [_verify/smoke-3-7.mjs:53] — deferred, pre-existing
+- [x] [Review][Defer] Windows path-fixup regex `replace(/^\/([A-Z]:)/, '$1')` may not match if `URL.pathname` omits the leading `/` on some Node/Windows versions [_verify/smoke-3-7.mjs:7] — deferred, pre-existing
 
 ## Dev Notes
 

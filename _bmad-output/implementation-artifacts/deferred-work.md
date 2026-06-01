@@ -1,5 +1,16 @@
 # Deferred Work
 
+## Deferred from: code review of 3-7-lo2-pot-odds-assessment (2026-05-31)
+
+- `testEquity` never tests (wrong ratio + correct equity) → FAIL path; ratio field's contribution to `validate()` is not isolated by the smoke test. [`_verify/smoke-3-7.mjs:168`]
+- `testEquity(15,false)` exercises `hints.ts:36` fallback path, not the `Math.abs(reqVal - 20) <= 3` detection-window path at `hints.ts:34`; the two code paths are indistinguishable from smoke test output. [`_verify/smoke-3-7.mjs:149`]
+- Rung-escalation second `submit()` — `waitForSelector('[role="alert"]')` may resolve on the still-visible rung-0 alert before rung-1 renders; a text-change assertion would be more reliable. [`_verify/smoke-3-7.mjs:129`]
+- Reload test does not read back ratio/requiredEquity input values to confirm they are empty post-reload; tests only the `.done` class absence. [`_verify/smoke-3-7.mjs:214`]
+- Floating-point band boundary not tested; only integer endpoints (16, 17, 15, 18) exercised; intermediate values (16.1, 16.5, 16.99) and the canonical 16.7 are only tested in the success path. [`_verify/smoke-3-7.mjs:178`]
+- Rung-1 text check uses a three-way OR of partial strings disjoint from rung-0 text — fragile but accidentally correct for current hint copy. [`_verify/smoke-3-7.mjs:130`]
+- `getFeedbackText()` targets `[role="alert"] .message` child; silently returns `''` (not a test failure) if feedback element ever removes the `.message` wrapper. [`_verify/smoke-3-7.mjs:53`]
+- Windows path-fixup regex `replace(/^\/([A-Z]:)/, '$1')` may not match if `new URL(...).pathname` omits the leading `/` before the drive letter on some Node.js/Windows environments. [`_verify/smoke-3-7.mjs:7`]
+
 ## Deferred from: code review of 3-6-lo1-equity-assessment (2026-05-31)
 
 - `sectionContent[active.id]` silently passes `undefined` for future unknown assessment sections — `Partial<Record<SectionId, Component>>` has no type enforcement that all assessment SectionIds have entries; a new section added without a corresponding sectionContent entry silently renders no prose with no error. [`App.svelte`]
