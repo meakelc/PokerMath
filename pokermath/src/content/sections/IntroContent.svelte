@@ -30,7 +30,7 @@
 <div class="card-row">
   <p>
     So <code class="notation">Ah</code> is the Ace of hearts and
-    <code class="notation">Tc</code> is the Ten of clubs:
+    <code class="notation">Tc</code> is the Ten of clubs. Here are some examples of how you'll see these expressed visually in this system:
   </p>
   <div class="card-col">
     <CardGroup label="Ah · Tc" cards={workedExamples} />
