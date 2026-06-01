@@ -11,15 +11,17 @@
   cards would improve your hand to a winner — those cards are your <strong>outs</strong>.
 </p>
 
-<p>
-  Say you're dealt <code class="notation">Ah Kh</code> and the flop comes
-  <code class="notation">Qh 8h 7c</code>. You have a flush draw: two hearts in your hand,
-  two hearts on the board.
-</p>
-
-<CardGroup label="Your hand" cards={hand} />
-
-<CardGroup label="Flop" cards={board} />
+<div class="card-row">
+  <p>
+    Say you're dealt <code class="notation">Ah Kh</code> and the flop comes
+    <code class="notation">Qh 8h 7c</code>. You have a flush draw: two hearts in your hand,
+    two hearts on the board.
+  </p>
+  <div class="card-col">
+    <CardGroup label="Your hand" cards={hand} />
+    <CardGroup label="Flop" cards={board} />
+  </div>
+</div>
 
 <p>
   How many outs do you have? There are 13 hearts in the deck. You can see four of them

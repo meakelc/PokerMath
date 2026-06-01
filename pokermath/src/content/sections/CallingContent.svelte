@@ -34,14 +34,16 @@
   correct, profitable play. If it falls short, folding is correct.
 </p>
 
-<p>
-  Return to the hand you have now seen in both LO1 and LO2: <code class="notation">Ah Kh</code>
-  on the flop <code class="notation">Qh 8h 7c</code> — a nine-out flush draw.
-</p>
-
-<CardGroup label="Your hand" cards={hand} />
-
-<CardGroup label="Flop" cards={board} />
+<div class="card-row">
+  <p>
+    Return to the hand you have now seen in both LO1 and LO2: <code class="notation">Ah Kh</code>
+    on the flop <code class="notation">Qh 8h 7c</code> — a nine-out flush draw.
+  </p>
+  <div class="card-col">
+    <CardGroup label="Your hand" cards={hand} />
+    <CardGroup label="Flop" cards={board} />
+  </div>
+</div>
 
 <p>
   <strong>Step one — your equity:</strong> 9 outs with two streets remaining — 9 × 4 =

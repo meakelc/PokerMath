@@ -27,20 +27,26 @@
   diamonds, <code class="notation">c</code> clubs, <code class="notation">s</code> spades.
 </p>
 
-<p>
-  So <code class="notation">Ah</code> is the Ace of hearts and
-  <code class="notation">Tc</code> is the Ten of clubs:
-</p>
+<div class="card-row">
+  <p>
+    So <code class="notation">Ah</code> is the Ace of hearts and
+    <code class="notation">Tc</code> is the Ten of clubs:
+  </p>
+  <div class="card-col">
+    <CardGroup label="Ah · Tc" cards={workedExamples} />
+  </div>
+</div>
 
-<CardGroup label="Ah · Tc" cards={workedExamples} />
-
-<p>
-  Each suit also has its own color throughout the tool — hearts red, diamonds blue,
-  clubs green, spades black. Here's one card from each suit so you can connect the
-  letter to the color before the first lesson:
-</p>
-
-<CardGroup label="All four suits" cards={fourSuits} />
+<div class="card-row">
+  <p>
+    Each suit also has its own color throughout the tool — hearts red, diamonds blue,
+    clubs green, spades black. Here's one card from each suit so you can connect the
+    letter to the color before the first lesson:
+  </p>
+  <div class="card-col">
+    <CardGroup label="All four suits" cards={fourSuits} />
+  </div>
+</div>
 
 <p>
   That's the whole system. Every card in every Section from here on uses this exact

@@ -64,16 +64,28 @@
   }
 
   .prose {
-    max-width: 60ch;           /* justified literal — DESIGN.md caps prose at ~60ch; no token exists. ch unit is the typographic measure, not a hex/size that has a token. */
     font: var(--font-body-lg);
     color: var(--color-text-on-felt);
   }
 
   .prose :global(p) {
+    max-width: 60ch; /* justified literal — DESIGN.md caps prose at ~60ch; no token exists */
     margin: 0;
   }
 
   .prose :global(p + p) {
+    margin-top: var(--space-4);
+  }
+
+  .prose :global(p + .card-row) {
+    margin-top: var(--space-4);
+  }
+
+  .prose :global(.card-row + p) {
+    margin-top: var(--space-4);
+  }
+
+  .prose :global(.card-row + .card-row) {
     margin-top: var(--space-4);
   }
 
@@ -83,6 +95,23 @@
 
   .prose :global(.group + p) {
     margin-top: var(--space-4);
+  }
+
+  .prose :global(.card-row) {
+    display: flex;
+    gap: var(--space-8);
+    align-items: flex-start;
+  }
+
+  .prose :global(.card-row > p) {
+    flex: 1 1 auto;
+  }
+
+  .prose :global(.card-col) {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    flex-shrink: 0;
   }
 
   .prose :global(strong) {

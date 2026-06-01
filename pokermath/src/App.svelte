@@ -71,7 +71,7 @@
     display: flex;
     flex-direction: column;
     background: var(--color-felt);
-    padding: var(--space-content-pad);
+    padding: var(--space-content-pad) var(--space-content-pad) var(--space-content-pad) 64px; /* wider left gap from sidebar — justified literal, no token for this value */
     min-height: 0;
     overflow-y: auto;
     overscroll-behavior-y: contain;

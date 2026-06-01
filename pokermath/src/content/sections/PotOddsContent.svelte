@@ -12,15 +12,17 @@
   pot is offering you.
 </p>
 
-<p>
-  Pick up where LO1 left off. You're on the flop holding <code class="notation">Ah Kh</code>
-  with the board showing <code class="notation">Qh 8h 7c</code> — a flush draw with roughly
-  36% equity. Your opponent now bets $10 into a $40 pot.
-</p>
-
-<CardGroup label="Your hand" cards={hand} />
-
-<CardGroup label="Flop" cards={board} />
+<div class="card-row">
+  <p>
+    Pick up where LO1 left off. You're on the flop holding <code class="notation">Ah Kh</code>
+    with the board showing <code class="notation">Qh 8h 7c</code> — a flush draw with roughly
+    36% equity. Your opponent now bets $10 into a $40 pot.
+  </p>
+  <div class="card-col">
+    <CardGroup label="Your hand" cards={hand} />
+    <CardGroup label="Flop" cards={board} />
+  </div>
+</div>
 
 <p>
   After the bet, the pot contains $50 when the decision reaches you. Your call is $10. The
