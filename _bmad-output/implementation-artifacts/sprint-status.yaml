@@ -35,7 +35,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 
 generated: 2026-05-29
-last_updated: 2026-05-31  # Story 3.6 → done
+last_updated: 2026-05-31  # Story 3.7 → review
 project: PokerMath
 project_key: NOKEY
 tracking_system: file-system
@@ -72,6 +72,6 @@ development_status:
   3-4-assessment-screen-archetype-input-primitives: done
   3-5-hint-success-feedback-rows: done
   3-6-lo1-equity-assessment: done
-  3-7-lo2-pot-odds-assessment: backlog
+  3-7-lo2-pot-odds-assessment: review
   3-8-lo3-call-profitability-assessment-the-climax: backlog
   epic-3-retrospective: optional
