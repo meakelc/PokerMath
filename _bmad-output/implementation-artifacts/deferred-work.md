@@ -1,5 +1,12 @@
 # Deferred Work
 
+## Deferred from: one-shot sticky-sidebar (2026-05-31)
+
+- Sidebar has no `overflow-y: auto` — if nav items + cheat-sheet buttons exceed `100vh` on short screens, the cheat-sheet buttons are clipped below the viewport with no scrollbar affordance. Pre-existing (see 1.3 deferred item); add `overflow-y: auto` to `.side` when addressing the sidebar layout story. [`Sidebar.svelte:.side`]
+- `.main` scroll position not reset on section navigation — clicking a sidebar item leaves `.main` scrolled to its previous position; new section renders mid-scroll. Pre-existing behavior (page scroll had same issue). Wire a `scrollTop = 0` call to `appState.currentSection` changes when addressing scroll UX. [`App.svelte`, `appState.svelte.ts`]
+- Pager not pinned to viewport when `.main` content overflows — `margin-top: auto` pushes Pager to bottom of `.screen`, but `.screen` grows with content inside the scroll container, so Pager scrolls off-screen on long sections. Pre-existing in nature (page scroll had same behavior). Consider `position: sticky; bottom: 0` on Pager if always-visible nav is desired. [`Pager.svelte`, `InformationalScreen.svelte`, `AssessmentScreen.svelte`]
+- Keyboard users cannot scroll `.main` without first Tabbing into it — `.main` is not focusable (`tabindex` not set); arrow keys only scroll a focused scroll container. Pre-existing accessibility gap. Add `tabindex="0"` and `aria-label` to `.main` if keyboard scrollability is required. [`App.svelte`]
+
 ## Deferred from: code review of 3-8-lo3-call-profitability-assessment-the-climax (2026-05-31)
 
 - `f.decision as Decision` cast in `buildSubmitted` has no in-function guard — cast is protected by the `canSubmit` derived store in all current callers; pre-existing pattern in the codebase; add a runtime assertion if `buildSubmitted` is ever called standalone. [`AssessmentScreen.svelte:buildSubmitted`]

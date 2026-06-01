@@ -72,6 +72,10 @@
     flex-direction: column;
     background: var(--color-felt);
     padding: var(--space-content-pad);
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    scrollbar-gutter: stable;
   }
 
   .modal-layer {
