@@ -12,6 +12,7 @@
   import type { ScenarioWithKey } from './content/scenarios'
 
   const active = $derived(sections[appState.currentSection])
+  const currentPageKind = $derived(active.pageKinds[appState.currentPage])
   const openSheet = $derived(cheatSheets.find((s) => s.id === appState.openCheatSheet))
 
   type AssessmentSectionId = 'equity' | 'pot-odds' | 'calling'
@@ -26,7 +27,7 @@
   <Sidebar />
 
   <main class="main">
-    {#if active.kind === 'assessment'}
+    {#if currentPageKind === 'assessment'}
       {@const asmEntry = assessmentScenarios[active.id as AssessmentSectionId]}
       {#if asmEntry}
         <AssessmentScreen
@@ -35,7 +36,6 @@
           subtitle={active.subtitle}
           scenario={asmEntry.scenario}
           answer={asmEntry.answer}
-          content={sectionContent[active.id]}
         />
       {/if}
     {:else if sectionContent[active.id]}

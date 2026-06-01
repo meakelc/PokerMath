@@ -4,6 +4,7 @@ import type { HintRung, ValidationResult, Decision } from './assessment/types'
 // Single source of mutable runtime state (AR-5).
 export const appState = $state({
   currentSection: 0, // index into content/sections.ts; 0 = Introduction (cold start)
+  currentPage: 0,    // sub-page index within the current section; resets to 0 on section change
   openCheatSheet: null as CheatSheetId | null, // null = closed; a CheatSheetId = that sheet open
   assessments: {
     lo1: {

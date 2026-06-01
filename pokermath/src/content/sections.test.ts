@@ -10,13 +10,13 @@ describe('sections', () => {
     expect(sections.map((s) => s.id)).toEqual(['intro', 'equity', 'pot-odds', 'calling'])
   })
 
-  it('first section is informational', () => {
-    expect(sections[0].kind).toBe('informational')
+  it('first section has only an informational page', () => {
+    expect(sections[0].pageKinds).toEqual(['informational'])
   })
 
-  it('three LO sections are assessment', () => {
-    expect(sections[1].kind).toBe('assessment')
-    expect(sections[2].kind).toBe('assessment')
-    expect(sections[3].kind).toBe('assessment')
+  it('three LO sections have informational then assessment pages', () => {
+    expect(sections[1].pageKinds).toEqual(['informational', 'assessment'])
+    expect(sections[2].pageKinds).toEqual(['informational', 'assessment'])
+    expect(sections[3].pageKinds).toEqual(['informational', 'assessment'])
   })
 })

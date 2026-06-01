@@ -2,15 +2,29 @@
   import { appState } from '../appState.svelte'
   import { sections } from '../../content/sections'
 
-  const hasBack = $derived(appState.currentSection > 0)
-  const hasNext = $derived(appState.currentSection < sections.length - 1)
+  const section = $derived(sections[appState.currentSection])
+  const hasBack = $derived(appState.currentPage > 0 || appState.currentSection > 0)
+  const hasNext = $derived(
+    appState.currentPage < section.pageKinds.length - 1 ||
+    appState.currentSection < sections.length - 1
+  )
 
   function back() {
-    if (appState.currentSection > 0) appState.currentSection -= 1
+    if (appState.currentPage > 0) {
+      appState.currentPage -= 1
+    } else if (appState.currentSection > 0) {
+      appState.currentSection -= 1
+      appState.currentPage = sections[appState.currentSection].pageKinds.length - 1
+    }
   }
 
   function next() {
-    if (appState.currentSection < sections.length - 1) appState.currentSection += 1
+    if (appState.currentPage < section.pageKinds.length - 1) {
+      appState.currentPage += 1
+    } else if (appState.currentSection < sections.length - 1) {
+      appState.currentSection += 1
+      appState.currentPage = 0
+    }
   }
 </script>
 

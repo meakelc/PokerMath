@@ -25,7 +25,7 @@
         subtitle={section.subtitle}
         active={i === appState.currentSection}
         complete={getSectionComplete(section)}
-        onselect={() => (appState.currentSection = i)}
+        onselect={() => { appState.currentSection = i; appState.currentPage = 0 }}
       />
     {/each}
   </nav>
