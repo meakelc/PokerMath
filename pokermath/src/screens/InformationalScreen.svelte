@@ -28,7 +28,7 @@
       </div>
     </div>
   {/key}
-  <Pager />
+  <Pager scrollHint={true} />
 </article>
 
 <style>

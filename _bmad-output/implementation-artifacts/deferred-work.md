@@ -1,5 +1,10 @@
 # Deferred Work
 
+## Deferred from: scroll-hint arrow on information screens (2026-05-31)
+
+- `position: fixed` on `.scroll-arrow` is broken when a CSS `transform`, `filter`, or `will-change` ancestor creates a containing block — pre-existing architectural pattern; no current ancestor uses these properties; revisit if any future parent applies them. [`Pager.svelte:109`]
+- Scroll arrow re-animates on every appearance when user scrolls back and forth near the fold threshold — CSS `opacity`/`visibility` transition fires each time `.visible` class is toggled; no hysteresis applied; acceptable for current content lengths. [`Pager.svelte:128`]
+
 ## Deferred from: one-shot sticky-sidebar (2026-05-31)
 
 - Sidebar has no `overflow-y: auto` — if nav items + cheat-sheet buttons exceed `100vh` on short screens, the cheat-sheet buttons are clipped below the viewport with no scrollbar affordance. Pre-existing (see 1.3 deferred item); add `overflow-y: auto` to `.side` when addressing the sidebar layout story. [`Sidebar.svelte:.side`]
