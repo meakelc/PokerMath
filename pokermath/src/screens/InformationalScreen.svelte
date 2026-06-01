@@ -101,6 +101,8 @@
     display: flex;
     gap: var(--space-8);
     align-items: flex-start;
+    border-top: 2px solid var(--color-gold);
+    padding-top: var(--space-4);
   }
 
   .prose :global(.card-row > p) {
