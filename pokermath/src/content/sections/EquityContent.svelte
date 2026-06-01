@@ -40,11 +40,11 @@
 <p>
   That's accurate, but slow to compute at the table. The <strong>Rule of 2-and-4</strong>
   gives you a fast approximation: <strong>×4 for two streets remaining, ×2 for one</strong>.
-  With two streets still to come (turn and river), multiply your outs by 4: 9 × 4 = 36% —
-  within a percentage point of the exact figure.
+  With two streets still to come (turn and river), multiply your outs by 4: 9 × 4 = 36%.
+  Within a percentage point of the exact figure!
 </p>
 
 <p>
-  Fix this split now before you move to the assessment. Two streets remaining: multiply by 4.
-  One street remaining: multiply by 2. You'll apply it to new scenarios right away.
+  Remember this split now before you move to the assessment. Two streets remaining: multiply by 4.
+  One street remaining: multiply by 2. You'll apply it to scenarios right away.
 </p>

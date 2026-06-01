@@ -7,7 +7,7 @@
 </script>
 
 <p>
-  This tool assumes you already know a 52-card deck and Texas Hold 'Em — the betting
+  This tool assumes you already know a 52-card deck and Texas Hold 'Em: the betting
   rounds, the community board, what makes a winning hand. If you ever want a refresher
   on any of that, the Cheat Sheets in the sidebar have the essentials.
 </p>
@@ -39,7 +39,7 @@
 
 <div class="card-row">
   <p>
-    Each suit also has its own color throughout the tool — hearts red, diamonds blue,
+    Each suit also has its own color throughout the tool: hearts red, diamonds blue,
     clubs green, spades black. Here's one card from each suit so you can connect the
     letter to the color before the first lesson:
   </p>
@@ -47,8 +47,3 @@
     <CardGroup label="All four suits" cards={fourSuits} />
   </div>
 </div>
-
-<p>
-  That's the whole system. Every card in every Section from here on uses this exact
-  two-character notation — you'll find it becomes second nature quickly.
-</p>

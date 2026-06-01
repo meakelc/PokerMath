@@ -7,7 +7,7 @@
 </script>
 
 <p>
-  Pot odds are the price of calling expressed as a ratio — how much is already in the pot
+  Pot odds are the price of calling expressed as a ratio; how much is already in the pot
   versus what you must add. Before you can decide whether to call, you need to know what the
   pot is offering you.
 </p>
@@ -25,21 +25,20 @@
 </div>
 
 <p>
-  After the bet, the pot contains $50 when the decision reaches you. Your call is $10. The
-  ratio is <strong>$50 to $10 — or 5:1</strong>. Five dollars already in the pot for every
+  After the bet, the pot contains $50 when the decision reaches you. Your call is $10. Therefore,
+  ratio can be expressed as <strong>$50 to $10</strong> or <strong>5:1</strong>. Five dollars already in the pot for every
   one dollar you put in.
 </p>
 
 <p>
   A ratio alone does not tell you whether to call. You need to convert it to a required
-  equity. The formula: <strong>required equity = call ÷ (pot + call)</strong>. The denominator
-  is the total pot if you call — your share of the prize.
+  equity. The formula: <strong>required equity = call ÷ (pot + call)</strong>.
 </p>
 
 <p>
   In this spot: $10 ÷ ($50 + $10) = $10 ÷ $60 ≈ <strong>16.7%</strong>. That is the minimum
   equity your hand needs to make the call profitable over many identical situations. Your flush
-  draw has 36% equity — well above the threshold, so calling is correct.
+  draw has 36% equity (well above the threshold!), so calling is correct.
 </p>
 
 <p>
@@ -51,5 +50,5 @@
 
 <p>
   In the assessment you will compute the ratio and required equity for a specific pot and call
-  amount. Fix the formula now: <strong>call ÷ (pot + call)</strong>.
+  amount. Remember the formula now: <strong>call ÷ (pot + call)</strong>.
 </p>

@@ -15,7 +15,7 @@
 
 <p>
   Think about it this way: a friend offers you a simple game. Flip a fair coin. Heads, you
-  collect $5. Tails, you pay $1. You will lose roughly half the flips — but over 100 plays you
+  collect $5. Tails, you pay $1. You will lose roughly half the flips, but over 100 plays you
   collect $250 and pay out $50, a profit of $200. You should take every single flip without
   hesitation. <strong>The math decides, not any individual outcome.</strong>
 </p>

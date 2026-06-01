@@ -298,18 +298,19 @@
   }
 
   .prose {
-    max-width: 60ch;
     font: var(--font-body-lg);
     color: var(--color-text-on-felt);
   }
 
-  .prose :global(p) { margin: 0; }
+  .prose :global(p) { max-width: 60ch; margin: 0; }
   .prose :global(p + p) { margin-top: var(--space-4); }
   .prose :global(p + .card-row) { margin-top: var(--space-4); }
   .prose :global(.card-row + p) { margin-top: var(--space-4); }
   .prose :global(p + .group) { margin-top: var(--space-4); }
   .prose :global(.group + p) { margin-top: var(--space-4); }
-  .prose :global(.card-col) { display: flex; flex-direction: column; gap: var(--space-4); }
+  .prose :global(.card-row) { display: flex; gap: var(--space-8); align-items: flex-start; }
+  .prose :global(.card-row > p) { flex: 1 1 auto; }
+  .prose :global(.card-col) { display: flex; flex-direction: column; gap: var(--space-4); flex-shrink: 0; }
   .prose :global(strong) { font-weight: 600; color: var(--color-text-on-felt); }
   .prose :global(code.notation) { font: var(--font-value); color: var(--color-gold); }
 </style>
