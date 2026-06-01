@@ -12,7 +12,8 @@
   import FeedbackRow from '../lib/components/FeedbackRow.svelte'
   import type { Component } from 'svelte'
   import type { SectionId } from '../content/sections'
-  import type { Scenario, AnswerKey } from '../lib/assessment/types'
+  import type { Scenario, AnswerKey, Decision } from '../lib/assessment/types'
+  import CallFoldToggle from '../lib/components/CallFoldToggle.svelte'
 
   let {
     sectionId,
@@ -40,9 +41,8 @@
       return f.ratio[0] !== '' && f.ratio[1] !== '' && f.requiredEquity !== ''
     }
     if (scenario.lo === 'lo3') {
-      // decision (CallFoldToggle) excluded — added in Story 3.8
       const f = appState.assessments.lo3.fields
-      return f.equity !== '' && f.ratio[0] !== '' && f.ratio[1] !== '' && f.requiredEquity !== ''
+      return f.equity !== '' && f.ratio[0] !== '' && f.ratio[1] !== '' && f.requiredEquity !== '' && f.decision !== ''
     }
     return false
   })
@@ -71,7 +71,7 @@
       equity: f.equity,
       ratio: f.ratio as [string, string],
       requiredEquity: f.requiredEquity,
-      // decision excluded until Story 3.8 wires CallFoldToggle
+      decision: f.decision as Decision,
     }
   }
 
@@ -200,7 +200,10 @@
                 bind:value={appState.assessments.lo3.fields.requiredEquity}
               />
             </div>
-            <!-- CallFoldToggle: Story 3.8 -->
+            <div class="field-row">
+              <span class="field-label">Your decision</span>
+              <CallFoldToggle bind:value={appState.assessments.lo3.fields.decision} />
+            </div>
           </div>
         {/if}
 
