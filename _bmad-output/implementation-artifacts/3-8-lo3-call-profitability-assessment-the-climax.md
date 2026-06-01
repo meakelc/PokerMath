@@ -4,7 +4,7 @@ baseline_commit: 8f1d767
 
 # Story 3.8: LO3 call profitability assessment (the climax)
 
-Status: review
+Status: done
 
 ## Story
 
@@ -231,6 +231,11 @@ claude-sonnet-4-6
 - pokermath/src/lib/components/CallFoldToggle.svelte (NEW)
 - pokermath/src/screens/AssessmentScreen.svelte (MODIFY — 3 patches)
 - _verify/smoke-3-8.mjs (NEW)
+
+### Review Findings
+
+- [x] [Review][Patch] Space key selects 'call' when `value === ''` and Fold button is focused — `handleKey` ignores the `_d` parameter; fix: `select(value === '' ? _d : value === 'call' ? 'fold' : 'call')` [`pokermath/src/lib/components/CallFoldToggle.svelte:handleKey`]
+- [x] [Review][Defer] `f.decision as Decision` cast has no in-function guard [`pokermath/src/screens/AssessmentScreen.svelte:buildSubmitted`] — deferred, pre-existing pattern; guarded by `canSubmit` in all current callers
 
 ### Change Log
 

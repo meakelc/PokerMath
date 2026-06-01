@@ -1,5 +1,9 @@
 # Deferred Work
 
+## Deferred from: code review of 3-8-lo3-call-profitability-assessment-the-climax (2026-05-31)
+
+- `f.decision as Decision` cast in `buildSubmitted` has no in-function guard — cast is protected by the `canSubmit` derived store in all current callers; pre-existing pattern in the codebase; add a runtime assertion if `buildSubmitted` is ever called standalone. [`AssessmentScreen.svelte:buildSubmitted`]
+
 ## Deferred from: code review of 3-7-lo2-pot-odds-assessment (2026-05-31)
 
 - `testEquity` never tests (wrong ratio + correct equity) → FAIL path; ratio field's contribution to `validate()` is not isolated by the smoke test. [`_verify/smoke-3-7.mjs:168`]

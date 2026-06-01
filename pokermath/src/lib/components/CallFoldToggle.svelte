@@ -7,10 +7,10 @@
     value = d
   }
 
-  function handleKey(e: KeyboardEvent, _d: Decision) {
+  function handleKey(e: KeyboardEvent, d: Decision) {
     if (e.key === 'ArrowLeft') { e.preventDefault(); select('fold') }
     else if (e.key === 'ArrowRight') { e.preventDefault(); select('call') }
-    else if (e.key === ' ') { e.preventDefault(); select(value === 'call' ? 'fold' : 'call') }
+    else if (e.key === ' ') { e.preventDefault(); select(value === '' ? d : value === 'call' ? 'fold' : 'call') }
   }
 </script>
 
