@@ -6,9 +6,11 @@
   import SidebarNavItem from './SidebarNavItem.svelte'
 
   function getSectionComplete(section: Section): boolean {
-    if (section.id === 'equity')   return appState.assessments.lo1.passed
-    if (section.id === 'pot-odds') return appState.assessments.lo2.passed
-    if (section.id === 'calling')  return appState.assessments.lo3.passed
+    if (section.id === 'equity')    return appState.assessments.lo1.passed
+    if (section.id === 'pot-odds')  return appState.assessments.lo2.passed
+    if (section.id === 'calling')   return appState.assessments.lo3.passed
+    if (section.id === 'pre-test')  return appState.quiz.pre.submitted
+    if (section.id === 'post-test') return appState.quiz.post.submitted
     return false
   }
 </script>

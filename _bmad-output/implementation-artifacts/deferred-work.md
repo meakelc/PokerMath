@@ -1,5 +1,10 @@
 # Deferred Work
 
+## Deferred from: optional pre/post-test assessment (2026-06-02)
+
+- No in-app retake of a submitted quiz, and reload clears BOTH administrations — a submitted quiz locks permanently (`state.submitted` never cleared), and the only reset is a full page reload, which wipes `quiz.pre` and `quiz.post` together (in-memory only). Consequence: the post-test can't be retaken without losing the pre-test score. Direct result of the chosen in-memory + permanent-lock design. Revisit if learners need multiple post-test attempts; a per-administration "Retake" that clears only that slice would resolve it. [`QuizScreen.svelte` (locked fieldset), `appState.svelte.ts` (`quiz` slice)]
+- Pre→post ordering is unenforced — free sidebar navigation lets a learner submit the Post-Test before the Pre-Test (pre score null → "no pre-test on record"). Taking the pre-test afterward recomputes gain reactively, but because the post-test is then locked, surfacing a gain number requires a reload (which clears state). Tied to the "quizzes are optional, nothing forces them" decision. Enforcing order would contradict that; revisit only if effectiveness data quality demands it. [`Sidebar.svelte`, `QuizScreen.svelte`]
+
 ## Deferred from: scroll-hint arrow on information screens (2026-05-31)
 
 - `position: fixed` on `.scroll-arrow` is broken when a CSS `transform`, `filter`, or `will-change` ancestor creates a containing block — pre-existing architectural pattern; no current ancestor uses these properties; revisit if any future parent applies them. [`Pager.svelte:109`]

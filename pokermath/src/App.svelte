@@ -6,10 +6,12 @@
   import Sidebar from './lib/components/Sidebar.svelte'
   import InformationalScreen from './screens/InformationalScreen.svelte'
   import AssessmentScreen from './screens/AssessmentScreen.svelte'
+  import QuizScreen from './screens/QuizScreen.svelte'
   import CheatSheetModal from './lib/components/CheatSheetModal.svelte'
   import { cheatSheetContent } from './content/cheatsheets/index'
   import { assessments } from './content/scenarios'
   import type { ScenarioWithKey } from './content/scenarios'
+  import type { QuizVariant } from './content/quiz'
 
   const active = $derived(sections[appState.currentSection])
   const currentPageKind = $derived(active.pageKinds[appState.currentPage])
@@ -21,13 +23,20 @@
     'pot-odds': assessments.lo2,
     calling: assessments.lo3,
   }
+
+  const quizVariants: Record<'pre-test' | 'post-test', QuizVariant> = {
+    'pre-test': 'pre',
+    'post-test': 'post',
+  }
 </script>
 
 <div class="app">
   <Sidebar />
 
   <main class="main">
-    {#if currentPageKind === 'assessment'}
+    {#if currentPageKind === 'quiz'}
+      <QuizScreen variant={quizVariants[active.id as 'pre-test' | 'post-test']} title={active.title} />
+    {:else if currentPageKind === 'assessment'}
       {@const asmEntry = assessmentScenarios[active.id as AssessmentSectionId]}
       {#if asmEntry}
         <AssessmentScreen
